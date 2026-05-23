@@ -1,17 +1,44 @@
-# Quartz v4
+# Hello, I'm Kate Jo
 
-> “[One] who works with the door open gets all kinds of interruptions, but [they] also occasionally gets clues as to what the world is and what might be important.” — Richard Hamming
+A personal knowledge base and blog powered by Quartz 4.
 
-Quartz is a set of tools that helps you publish your [digital garden](https://jzhao.xyz/posts/networked-thought) and notes as a website for free.
+## Overview
 
-🔗 Read the documentation and get started: https://quartz.jzhao.xyz/
+This repository is a personal blog that converts notes written in Obsidian into a static website using Quartz v4.
 
-[Join the Discord Community](https://discord.gg/cRFFHYye7t)
+It combines Obsidian's powerful knowledge management with Quartz's beautiful web publishing — a space to organize and share thoughts.
 
-## Sponsors
+**Link**: https://hellominjo.github.io
 
-<p align="center">
-  <a href="https://github.com/sponsors/jackyzha0">
-    <img src="https://cdn.jsdelivr.net/gh/jackyzha0/jackyzha0/sponsorkit/sponsors.svg" />
-  </a>
-</p>
+
+### Features
+
+- `content` directory linked to Obsidian vault via symbolic link
+- `[[wikilink]]` style internal links supported
+- Fully compatible with Obsidian-flavored Markdown
+
+
+## Tech Stack
+
+| Category | Tech |
+|------|------|
+| Content Creation | Obsidian |
+| Static Site Generator | Quartz v4 |
+| Framework | Preact (Static Rendering) |
+| Build Tools | esbuild, Lightning CSS |
+| Deployment | GitHub Pages |
+
+
+## Folder Structure
+
+```
+hellominjo/
+├── content/             # Obsidian vault symbolic link (content)
+├── quartz/              # Quartz framework core
+│   ├── components/      # UI Components
+│   ├── plugins/         # transformers, filters, emitters
+│   └── ...
+├── quartz.config.ts     # Site Configuration
+├── quartz.layout.ts     # Page Layout
+└── public/              # Build result for deployment
+```

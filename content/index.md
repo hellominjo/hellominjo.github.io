@@ -1,5 +1,5 @@
 ---
-title: Blog
+title: Home
 description: Welcome to 푸른하늘 은하수
 date: 2026-05-16
 aliases:
@@ -20,4 +20,4 @@ aliases:
 - **[[tags/index|Tags]]** — 관심있는 주제 태그로 찾아보세요.
 
 
-궁금한 점이나 원하는 문서를 빠르게 찾고 싶다면 왼쪽 상단 검색창을 사용
+궁금한 점이나 원하는 문서를 빠르게 찾고 싶다면 왼쪽 상단 검색창을 사용해주세요.
