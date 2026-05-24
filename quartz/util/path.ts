@@ -54,12 +54,17 @@ export function getFullSlug(window: Window): FullSlug {
   return res
 }
 
+/* A slug is a URL-friendly string @ 26.05.16 */
 function sluggify(s: string): string {
   return s
     .split("/")
     .map((segment) =>
       segment
-        .replace(/\s/g, "-")
+        .replace(/[\p{Emoji_Presentation}‍️︎]/gu, "")
+        .replace(/\s+/g, "-")
+        .replace(/^[^a-zA-Z0-9가-힣]+/g, "")
+        .replace(/^-+|-+$/g, "")
+        .toLowerCase()
         .replace(/&/g, "-and-")
         .replace(/%/g, "-percent")
         .replace(/\?/g, "")
