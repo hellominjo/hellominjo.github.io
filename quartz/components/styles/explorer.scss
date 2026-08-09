@@ -283,6 +283,7 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
       overscroll-behavior: none; /*contaion -> none;*/
       overflow-y: hidden;
       margin-left: 9px;
+      font-weight: $baseWeight !important;   
     }
   }
 }
