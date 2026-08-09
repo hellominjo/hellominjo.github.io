@@ -111,6 +111,10 @@ button.desktop-explorer {
   }
 }
 
+.explorer-mobile-title {
+  display: none;
+}
+
 .explorer-content {
   list-style: none;
   overflow: hidden;
@@ -170,8 +174,8 @@ button.desktop-explorer {
     color: var(--secondary);
     font-family: var(--headerFont);
     font-size: 0.95rem;
-    font-weight: $semiBoldWeight;
-    line-height: 1.5rem;
+    font-weight: $baseWeight;
+    line-height: 1.8rem;
     display: inline-block;
   }
 
@@ -261,6 +265,18 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
       visibility: hidden;
     }
 
+    .explorer-mobile-title {
+      display: block;
+      margin: 0 0 1rem 0;
+      padding: 0 1rem;
+      font-family: var(--titleFont);
+      font-size: 1.3rem;
+
+      & a {
+        color: var(--darkgray) !important;
+      }
+    }
+
     .mobile-explorer {
       margin: 0;
       padding: 5px;
@@ -276,7 +292,9 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
 .mobile-no-scroll {
   @media all and ($mobile) {
     .explorer-content > .explorer-ul {
-      overscroll-behavior: contain;
+      overscroll-behavior: none; /*contaion -> none;*/
+      overflow-y: hidden;
+      padding-left: 5px;
     }
   }
 }

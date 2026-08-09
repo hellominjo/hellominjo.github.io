@@ -92,12 +92,11 @@ git config --global user.email "본인 이메일"
 [File : quartz/.github/workflows/deploy.yml]
 
 ```bash
-
-nname: Deploy Quartz site to GitHub Pages
+name: Deploy Quartz site to GitHub Pages
 on:
   push:
     branches:
-      - v4
+      - main
   workflow_dispatch:
 permissions:
   contents: read
