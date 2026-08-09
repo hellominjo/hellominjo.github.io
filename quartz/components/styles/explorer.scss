@@ -130,7 +130,7 @@ button.desktop-explorer {
       color: var(--dark);
       opacity: 0.75;
       font-weight: $baseWeight;
-      font-size: 0.96rem;
+      font-size: 0.98rem;
       pointer-events: all;
 
       @media all and ($mobile) {
@@ -295,8 +295,10 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
     .explorer-content > .explorer-ul {
       overscroll-behavior: none; /*contaion -> none;*/
       overflow-y: hidden;
-      margin-left: 9px;
       font-weight: $baseWeight !important;   
+      padding: 0 9px 15px;
+      width: 93%;
+      white-space: nowrap;      
     }
   }
 }
