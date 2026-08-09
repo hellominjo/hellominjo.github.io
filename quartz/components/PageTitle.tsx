@@ -38,6 +38,11 @@ PageTitle.css = `
 }
 
 @media (max-width: 800px) {
+  .page-title-wrapper {
+    position: relative;
+    z-index: 101;
+  }
+
   .page-title {
     font-size: 1.3rem;
   }

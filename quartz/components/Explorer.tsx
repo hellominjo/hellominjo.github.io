@@ -8,7 +8,6 @@ import { i18n } from "../i18n"
 import { FileTrieNode } from "../util/fileTrie"
 import OverflowListFactory from "./OverflowList"
 import { concatenateResources } from "../util/resources"
-import { pathToRoot } from "../util/path"
 
 type OrderEntries = "sort" | "filter" | "map"
 
@@ -61,7 +60,7 @@ export default ((userOpts?: Partial<Options>) => {
   const opts: Options = { ...defaultOptions, ...userOpts }
   const { OverflowList, overflowListAfterDOMLoaded } = OverflowListFactory()
 
-  const Explorer: QuartzComponent = ({ cfg, displayClass, fileData }: QuartzComponentProps) => {
+  const Explorer: QuartzComponent = ({ cfg, displayClass }: QuartzComponentProps) => {
     const id = `explorer-${numExplorers++}`
 
     return (
@@ -121,9 +120,6 @@ export default ((userOpts?: Partial<Options>) => {
           </svg>
         </button>
         <div id={id} class="explorer-content" aria-expanded={false} role="group">
-          <h1 class="explorer-mobile-title">
-            <a href={pathToRoot(fileData.slug!)}>{cfg.pageTitle}</a>
-          </h1>
           <OverflowList class="explorer-ul" />
         </div>
         <template id="template-file">

@@ -111,10 +111,6 @@ button.desktop-explorer {
   }
 }
 
-.explorer-mobile-title {
-  display: none;
-}
-
 .explorer-content {
   list-style: none;
   overflow: hidden;
@@ -173,9 +169,9 @@ button.desktop-explorer {
   & div > a {
     color: var(--secondary);
     font-family: var(--headerFont);
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: $baseWeight;
-    line-height: 1.8rem;
+    line-height: 2.2rem;
     display: inline-block;
   }
 
@@ -196,12 +192,12 @@ button.desktop-explorer {
     font-family: var(--headerFont);
 
     & span {
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       display: inline-block;
       color: var(--secondary);
       font-weight: $semiBoldWeight;
       margin: 0;
-      line-height: 1.5rem;
+      line-height: 2.2rem;
       pointer-events: none;
     }
   }
@@ -263,18 +259,6 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
       height: 100dvh;
       max-height: 100dvh;
       visibility: hidden;
-    }
-
-    .explorer-mobile-title {
-      display: block;
-      margin: 0 0 1rem 0;
-      padding: 0 1rem;
-      font-family: var(--titleFont);
-      font-size: 1.3rem;
-
-      & a {
-        color: var(--darkgray) !important;
-      }
     }
 
     .mobile-explorer {
