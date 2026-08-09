@@ -26,11 +26,11 @@
         }
       }
 
-      .section > .desc > h3 {
+      .section > .desc > h3, .section > .desc > h4 {
         margin: 0;
       }
 
-      .section > .desc > h3 > a {
+      .section > .desc > h3 > a, .section > .desc > h4 > a {
         background-color: transparent;
       }
 

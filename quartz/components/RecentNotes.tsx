@@ -52,11 +52,11 @@ export default ((userOpts?: Partial<Options>) => {
                     </p>
                   )}
                   <div class="desc">
-                    <h3>
+                    <h4>
                       <a href={resolveRelative(fileData.slug!, page.slug!)} class="internal">
                         {title}
                       </a>
-                    </h3>
+                    </h4>
                   </div>
                   {opts.showTags && (
                     <ul class="tags">

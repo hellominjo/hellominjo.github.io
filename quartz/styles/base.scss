@@ -125,6 +125,12 @@ a {
     }
   }
 
+  body[data-slug="index"] &.internal {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+  }
+
   &.external .external-icon {
     height: 1ex;
     margin: 0 0.15em;
@@ -132,6 +138,18 @@ a {
     >path {
       fill: var(--dark);
     }
+  }
+}
+
+[saved-theme="dark"] a {
+  color: var(--darkgray);
+
+  &:hover {
+    color: var(--dark);
+  }
+
+  &.internal.broken {
+    color: var(--darkgray);
   }
 }
 

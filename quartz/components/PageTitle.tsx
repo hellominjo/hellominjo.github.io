@@ -32,7 +32,7 @@ PageTitle.css = `
 }
 
 .page-title {
-  font-size: 1.58rem;
+  font-size: 1.4rem;
   margin: 0;
   font-family: var(--titleFont);
 }

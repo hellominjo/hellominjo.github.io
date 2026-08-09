@@ -290,6 +290,38 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
   }
 }
 
+[saved-theme="dark"] {
+  .explorer-content ul li > a {
+    color: var(--darkgray);
+
+    &.active {
+      color: var(--dark);
+    }
+  }
+
+  .folder-container {
+    & div > a {
+      color: var(--darkgray);
+    }
+
+    & div > a:hover {
+      color: var(--dark);
+    }
+
+    & div > button span {
+      color: var(--darkgray);
+    }
+  }
+
+  .folder-icon {
+    color: var(--darkgray);
+  }
+
+  .folder-icon:hover {
+    color: var(--dark);
+  }
+}
+
 .mobile-no-scroll {
   @media all and ($mobile) {
     .explorer-content > .explorer-ul {
