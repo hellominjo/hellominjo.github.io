@@ -129,7 +129,19 @@ button.desktop-explorer {
     & li > a {
       color: var(--dark);
       opacity: 0.75;
+      font-weight: $baseWeight;
       pointer-events: all;
+
+      @media all and ($mobile) {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow: hidden;
+        width: 100%;
+        overflow-wrap: break-word;
+        word-break: break-word;
+      }
 
       &.active {
         opacity: 1;
