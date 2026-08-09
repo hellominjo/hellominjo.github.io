@@ -73,7 +73,7 @@
     }
 
     button.desktop-explorer {
-      display: none;
+      display: flex;
     }
   }
 
@@ -222,6 +222,10 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
 
 .explorer {
   @media all and ($mobile) {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+
     &.collapsed {
       flex: 0 0 34px;
 
@@ -278,7 +282,7 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
     .explorer-content > .explorer-ul {
       overscroll-behavior: none; /*contaion -> none;*/
       overflow-y: hidden;
-      padding-left: 5px;
+      margin-left: 9px;
     }
   }
 }
