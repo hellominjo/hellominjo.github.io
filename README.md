@@ -8,7 +8,7 @@ This repository is a personal blog that converts notes written in Obsidian into 
 
 It combines Obsidian's powerful knowledge management with Quartz's beautiful web publishing — a space to organize and share thoughts.
 
-**Link**: https://hellominjo.github.io
+**URL**: https://hellominjo.github.io
 
 
 ### Features

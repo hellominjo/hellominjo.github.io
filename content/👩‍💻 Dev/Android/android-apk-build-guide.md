@@ -5,9 +5,8 @@ permalink: android-apk-build-guide
 created: 2026-08-08
 draft:
 tags:
-  - "#안드로이드"
+  - aos
   - 자동화
-  - Deploy
 ---
 ## Android 프로젝트 생성 및 APK 빌드 가이드
 
