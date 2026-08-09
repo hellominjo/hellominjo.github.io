@@ -5,8 +5,9 @@ permalink: automation-testing-claude-mcp
 created: 2026-08-08
 draft:
 tags:
-  - 자동화
   - aos
+  - 자동화
+  - quartz
 ---
 ## 안드로이드 앱 자동화 : Claude + Appium MCP 설정 가이드
 

@@ -1,3 +1,5 @@
+@use "../../styles/variables.scss" as *;
+
 .readermode {
   cursor: pointer;
   padding: 0;
@@ -9,6 +11,10 @@
   margin: 0;
   text-align: inherit;
   flex-shrink: 0;
+
+  @media #{$mobile} {
+    display: none;
+  }
 
   & svg {
     position: absolute;
