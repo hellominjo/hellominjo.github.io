@@ -480,6 +480,76 @@ body.lab-drawer-open #quartz-body > .sidebar.left {
   color: var(--lab-text);
 }
 
+/* 데스크톱: 선택 상자 숨김, 목록 항상 펼침 */
+.lab-links__toggle {
+  display: none;
+}
+
+/* 모바일: Explore Labs 드롭다운 (라벨 + 선택 상자 + 목록 패널) */
+@media (max-width: 800px) {
+  /* 선택 상자에 같은 문구가 있으므로 라벨 숨김 */
+  .lab-links__title {
+    display: none;
+  }
+
+  .lab-links__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 44px;
+    margin: 0;
+    padding: 0 14px;
+    border: 1px solid var(--lab-border);
+    border-radius: 6px;
+    background: var(--lab-bg);
+    color: var(--lab-text);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .lab-links__chevron {
+    color: var(--lab-text);
+    transition: transform 0.2s ease;
+  }
+
+  .lab-links.is-open .lab-links__chevron {
+    transform: rotate(180deg);
+  }
+
+  .lab-links__list {
+    display: none;
+    max-height: 200px;
+    margin-top: 8px;
+    padding: 4px 0;
+    overflow-y: auto;
+    border: 1px solid var(--lab-border);
+    border-radius: 6px;
+    background: var(--lab-bg);
+  }
+
+  .lab-links.is-open .lab-links__list {
+    display: block;
+  }
+
+  .lab-links__list li {
+    margin: 0;
+  }
+
+  .lab-links__item {
+    display: flex;
+    width: 100%;
+    padding: 10px 14px;
+  }
+
+  .lab-links__item:hover {
+    background: var(--lab-border);
+  }
+}
+
 /* 07. HOME PAGE */
 
 body[data-slug="index"] #quartz-body > .center {
@@ -1034,9 +1104,17 @@ body[data-slug="articles"] .lab-section:last-child {
     flex-direction: column;
     align-items: stretch;
     gap: 1.2rem;
+    /* 오른쪽 여백을 줄여 목록이 드로어 폭을 최대한 쓰도록 */
+    width: min(360px, 92vw);
     margin: 0;
-    padding: 24px 18px;
+    padding: 24px 12px 24px 18px;
     background: var(--lab-bg);
+  }
+
+  /* 하위 폴더 들여쓰기 축소 */
+  #quartz-body > .sidebar.left .explorer-content .folder-outer > ul {
+    margin-left: 4px;
+    padding-left: 0.6rem;
   }
 
   /* MobileOnly(Spacer)가 남는 공간을 차지해 제목·검색이 아래로 밀리는 것 방지 */
@@ -1083,7 +1161,7 @@ body[data-slug="articles"] .lab-section:last-child {
   }
 
   .lab-hero p {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .lab-article-list {

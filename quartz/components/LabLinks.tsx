@@ -1,3 +1,4 @@
+import script from "./scripts/labLinks.inline"
 import type {
   QuartzComponent,
   QuartzComponentConstructor,
@@ -15,7 +16,19 @@ const LabLinks: QuartzComponent = () => {
   return (
     <nav class="lab-links" aria-label="Explore Labs">
       <h2 class="lab-links__title">Explore Labs</h2>
-      <ul class="lab-links__list">
+      {/* 모바일 전용 드롭다운 선택 상자 */}
+      <button
+        type="button"
+        class="lab-links__toggle"
+        aria-expanded="false"
+        aria-controls="lab-links-list"
+      >
+        <span>Explore Labs</span>
+        <svg class="lab-links__chevron" aria-hidden="true" width="10" height="10" viewBox="0 0 10 10">
+          <path d="M0 2.5h10L5 8z" fill="currentColor" />
+        </svg>
+      </button>
+      <ul class="lab-links__list" id="lab-links-list">
         {labs.map((lab) => (
           <li>
             <a
@@ -34,5 +47,7 @@ const LabLinks: QuartzComponent = () => {
     </nav>
   )
 }
+
+LabLinks.afterDOMLoaded = script
 
 export default (() => LabLinks) satisfies QuartzComponentConstructor

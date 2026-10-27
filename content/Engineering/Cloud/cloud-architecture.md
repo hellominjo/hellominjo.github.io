@@ -89,9 +89,6 @@ async def handle_order_created(message):
 
 ---
 
-*End of Note — Research / Engineering / Learning*
-*이 페이지는 디자인 검토를 위한 샘플 아티클입니다.*
-
 ## Related Notes
 
 - [AI Agent를 실제 서비스에 적용하며 고민한 것들](ai-agent-service.md)
