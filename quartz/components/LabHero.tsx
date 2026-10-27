@@ -1,3 +1,4 @@
+import script from "./scripts/labHero.inline"
 import type {
   QuartzComponent,
   QuartzComponentConstructor,
@@ -10,6 +11,9 @@ const particles = Array.from({ length: 168 }, (_, i) => {
   const radius = 11.6 * Math.sqrt(i) * (1 + jitter)
   const angle = i * GOLDEN_ANGLE + jitter
   return {
+    // 궤도 반경/각도 — labHero.inline.ts에서 회전 모션에 사용
+    orbit: +radius.toFixed(2),
+    angle: +angle.toFixed(4),
     cx: +(300 + radius * 1.45 * Math.cos(angle)).toFixed(2),
     cy: +(195 + radius * Math.sin(angle)).toFixed(2),
     r: i % 9 === 0 ? 3.8 : i % 4 === 0 ? 2.6 : 1.7,
@@ -63,8 +67,16 @@ const LabHero: QuartzComponent = () => {
             stroke-dasharray="5 9"
           />
           <g class="lab-hero__dots">
-            {particles.map((p) => (
-              <circle cx={p.cx} cy={p.cy} r={p.r} opacity={p.opacity} />
+            {particles.map((p, i) => (
+              <circle
+                cx={p.cx}
+                cy={p.cy}
+                r={p.r}
+                opacity={p.opacity}
+                data-orbit={p.orbit}
+                data-angle={p.angle}
+                style={`--o:${p.opacity};--d:-${((i * 7) % 24) * 0.25}s`}
+              />
             ))}
           </g>
         </svg>
@@ -73,5 +85,7 @@ const LabHero: QuartzComponent = () => {
     </section>
   )
 }
+
+LabHero.afterDOMLoaded = script
 
 export default (() => LabHero) satisfies QuartzComponentConstructor

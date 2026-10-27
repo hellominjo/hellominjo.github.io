@@ -634,6 +634,44 @@ body[data-slug="index"] #quartz-body > .center article {
   fill: var(--lab-text);
 }
 
+/* Hero 그래픽 애니메이션: 궤도 흐름 · 축 점선 흐름 · 입자 반짝임 */
+@media (prefers-reduced-motion: no-preference) {
+  .lab-hero__orbit {
+    animation: lab-orbit-flow 6s linear infinite;
+  }
+
+  .lab-hero__axis {
+    animation: lab-axis-flow 3s linear infinite;
+  }
+
+  /* --o: 원래 투명도, --d: 입자별 지연 (LabHero.tsx) */
+  .lab-hero__dots circle {
+    animation: lab-dot-twinkle 6s ease-in-out var(--d, 0s) infinite;
+  }
+}
+
+@keyframes lab-orbit-flow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+@keyframes lab-axis-flow {
+  to {
+    stroke-dashoffset: -15;
+  }
+}
+
+@keyframes lab-dot-twinkle {
+  0%,
+  100% {
+    opacity: var(--o, 0.5);
+  }
+  50% {
+    opacity: calc(var(--o, 0.5) * 0.25);
+  }
+}
+
 .lab-hero .lab-hero__graphic-label {
   position: absolute;
   left: 18px;
@@ -1161,11 +1199,16 @@ body[data-slug="articles"] .lab-section:last-child {
   }
 
   .lab-hero p {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .lab-article-list {
     margin-top: 56px;
+  }
+
+
+  .lab-hero__description {
+    width: 255px;
   }
 
   article h1 {
@@ -1178,6 +1221,9 @@ body[data-slug="articles"] .lab-section:last-child {
 }
 
 @media (max-width: 520px) {
+  .lab-hero figure {
+    margin: 10px;
+  }
   .lab-research-index .research-grid,
   .research-index .research-grid {
     grid-template-columns: 1fr;
