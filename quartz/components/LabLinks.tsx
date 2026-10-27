@@ -5,10 +5,10 @@ import type {
 
 // 왼쪽 메뉴 Explorer 아래 외부 Lab 링크
 const labs = [
-  { title: "HR Analytics", href: "https://hellominjo.net/hr-analytics" },
-  { title: "ML Programming", href: "https://hellominjo.net/ml-programming" },
-  { title: "AI Playground", href: "https://hellominjo.net/ai-playground" },
-  { title: "EDU Studio", href: "https://hellominjo.net/edu-studio" },
+  { title: "HR Analytics", href: "https://hellominjo.github.io/hr-analytics-lab" },
+  { title: "ML Programming", href: "https://hellominjo.github.io/ml-programming-lab" },
+  { title: "AI Playground", href: "https://hellominjo.github.io/ai-playground/"},
+  { title: "EDU Studio", href: "https://hellominjo.github.io/edu-studio" },
 ]
 
 const LabLinks: QuartzComponent = () => {
