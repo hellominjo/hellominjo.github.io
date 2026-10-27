@@ -15,13 +15,13 @@ tags:
 이 블로그는 **Quartz 4**로 제작되었습니다. `Quartz`는 Obsidian으로 작성한 노트를 정적 웹사이트로 퍼블리싱할 수 있는 도구로 자유로운 커스텀이 가능하므로 설정하면서 얻은 지식과 경험들을 기록하고 공유하고자 합니다.
 
 
-## 주요 기능
+### 주요 기능
 
 - 마크다운 파일을 HTML로 변환
 - 백링크 및 그래프 뷰 지원
 - 빠른 검색 기능
 
-## 시작하는 법
+### 시작하는 법
 
 1. 'Quartz' 템플릿 저장소를 클론합니다.
 2. github에 'username.github.io'로 repo를 설정합니다. 
@@ -34,22 +34,22 @@ tags:
 
 ---
 
-## 1. 설치 과정
+### 1. 설치 과정
 
-### 1) Git Repo 복제
+#### 1) Git Repo 복제
 
 ```bash
 git clone https://github.com/username/username.github.io
 cd 저장소이름
 ```
 
-### 2) 패키지 설치
+#### 2) 패키지 설치
 
 ```bash
 npm install
 ```
 
-### 3) Quartz 초기화
+#### 3) Quartz 초기화
 
 ```bash
 npx create quartz
@@ -77,9 +77,9 @@ npx create quartz
 ```
 
 
-## 2. Git Config 설정  변경
+### 2. Git Config 설정  변경
 
-### 1) Git Config 설정 변경 
+#### 1) Git Config 설정 변경 
 
 ```bash
 git config --global user.name "본인 아이디"
@@ -87,7 +87,7 @@ git config --global user.email "본인 이메일"
 ```
 > `username` 부분을 자신의 GitHub 아이디로 교체합니다.
 
-### 2) GitHub Pages 활성화 및 Workflow 추가
+#### 2) GitHub Pages 활성화 및 Workflow 추가
 
 [File : quartz/.github/workflows/deploy.yml]
 
@@ -136,9 +136,9 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-## 3. 빌드 및 배포
+### 3. 빌드 및 배포
 
-### 1) 로컬 미리보기
+#### 1) 로컬 미리보기
 
 ```bash
 npx quartz build --serve
@@ -146,7 +146,7 @@ npx quartz build --serve
 
 > **확인방법** : 브라우저 접속 후 `http://localhost:8080` 에서 생성된 사이트를 확인할 수 있습니다.
 
-### 2) GitHub 배포
+#### 2) GitHub 배포
 
 ```bash
 git add .github/workflows/deploy.yml
