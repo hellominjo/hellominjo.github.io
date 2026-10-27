@@ -8,51 +8,60 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "푸른하늘 은하수", // 페이지 타이틀 수정. 
-    pageTitleSuffix: " | 푸른하늘 은하수",
-    enableSPA: true,
-    enablePopovers: true,
-    analytics: {
-      provider: "plausible",
-    },
-    locale: "en-US",
-    baseUrl: "hellominjo.github.io",
-    ignorePatterns: ["private", "templates", ".obsidian"],
-    defaultDateType: "modified",
-    theme: {
-      fontOrigin: "googleFonts",
-      cdnCaching: true,
-      typography: {
-        header: "Schibsted Grotesk",
-        body: "Source Sans Pro",
-        code: "IBM Plex Mono",
-      },
-      colors: {
-        lightMode: {
-          light: "#faf8f8",
-          lightgray: "#e5e5e5",
-          gray: "#b8b8b8",
-          darkgray: "#4e4e4e",
-          dark: "#2b2b2b",
-          secondary: "#284b63",
-          tertiary: "#1463a4ff",
-          highlight: "rgba(143, 159, 169, 0.15)",
-          textHighlight: "#fff23688",
-        },
-        darkMode: {
-          light: "#161618",
-          lightgray: "#393639",
-          gray: "#646464",
-          darkgray: "#d4d4d4",
-          dark: "#ebebec",
-          secondary: "#7b97aa",
-          tertiary: "#aabfbcff",
-          highlight: "rgba(143, 159, 169, 0.15)",
-          textHighlight: "#b3aa0288",
-        },
-      },
-    },
+  pageTitle: "HELLOMINJO",
+  pageTitleSuffix: " | Research & Engineering Lab",
+
+  enableSPA: true,
+  enablePopovers: true,
+
+  analytics: {
+    provider: "plausible",
   },
+
+  locale: "ko-KR",
+  baseUrl: "hellominjo.github.io",
+
+  ignorePatterns: ["private", "templates", ".obsidian"],
+  defaultDateType: "modified",
+
+  theme: {
+    fontOrigin: "googleFonts",
+    cdnCaching: true,
+
+    typography: {
+      // 로고(HELLOMINJO)용 800 굵기 포함
+      header: { name: "Inter", weights: [400, 700, 800] },
+      body: "Noto Sans KR",
+      code: "IBM Plex Mono",
+    },
+
+    colors: {
+      lightMode: {
+        light: "#f6f6f6",
+        lightgray: "#e5e5e5",
+        gray: "#a0a0a0",
+        darkgray: "#555555",
+        dark: "#141414",
+        secondary: "#303030",
+        tertiary: "#777777",
+        highlight: "rgba(20, 20, 20, 0.06)",
+        textHighlight: "#dddddd88",
+      },
+
+      darkMode: {
+        light: "#141414",
+        lightgray: "#303030",
+        gray: "#777777",
+        darkgray: "#c5c5c5",
+        dark: "#f5f5f5",
+        secondary: "#e0e0e0",
+        tertiary: "#aaaaaa",
+        highlight: "rgba(255, 255, 255, 0.08)",
+        textHighlight: "#66666688",
+      },
+    },
+   },
+  },     
   plugins: {
     transformers: [
       Plugin.FrontMatter(),

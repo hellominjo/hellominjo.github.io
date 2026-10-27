@@ -9,7 +9,8 @@ import { parseMarkdown } from "./processors/parse"
 import { filterContent } from "./processors/filter"
 import { emitContent } from "./processors/emit"
 import cfg from "../quartz.config"
-import { FilePath, joinSegments, slugifyFilePath } from "./util/path"
+import { FilePath, joinSegments } from "./util/path"
+import { clearSlugOverrideCache, slugifyWithOverrides } from "./util/slugOverride"
 import chokidar from "chokidar"
 import { ProcessedContent } from "./plugins/vfile"
 import { Argv, BuildCtx } from "./util/ctx"
@@ -79,7 +80,7 @@ async function buildQuartz(argv: Argv, mut: Mutex, clientRefresh: () => void) {
 
   const filePaths = markdownPaths.map((fp) => joinSegments(argv.directory, fp) as FilePath)
   ctx.allFiles = allFiles
-  ctx.allSlugs = allFiles.map((fp) => slugifyFilePath(fp as FilePath))
+  ctx.allSlugs = allFiles.map((fp) => slugifyWithOverrides(fp as FilePath, argv.directory))
 
   const parsedFiles = await parseMarkdown(ctx, filePaths)
   const filteredContent = filterContent(ctx, parsedFiles)
@@ -254,7 +255,10 @@ async function rebuild(changes: ChangeEvent[], clientRefresh: () => void, buildD
 
   // update allFiles and then allSlugs with the consistent view of content map
   ctx.allFiles = Array.from(contentMap.keys())
-  ctx.allSlugs = ctx.allFiles.map((fp) => slugifyFilePath(fp as FilePath))
+  clearSlugOverrideCache()
+  ctx.allSlugs = ctx.allFiles.map((fp) => slugifyWithOverrides(fp as FilePath, ctx.argv.directory))
+  // FolderContent / Breadcrumbs가 ctx.trie ??= 로 캐시 → 재빌드마다 초기화해야 새 글·draft 변경이 반영됨
+  ctx.trie = undefined
   let processedFiles = filterContent(
     ctx,
     Array.from(contentMap.values())

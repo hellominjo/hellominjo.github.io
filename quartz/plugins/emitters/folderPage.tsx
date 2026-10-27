@@ -17,7 +17,7 @@ import {
 import { defaultListPageLayout, sharedPageComponents } from "../../../quartz.layout"
 import { FolderContent } from "../../components"
 import { write } from "./helpers"
-import { i18n, TRANSLATIONS } from "../../i18n"
+import { TRANSLATIONS } from "../../i18n"
 import { BuildCtx } from "../../util/ctx"
 import { StaticResources } from "../../util/resources"
 interface FolderPageOptions extends FullPageLayout {
@@ -64,6 +64,17 @@ function computeFolderInfo(
   content: ProcessedContent[],
   locale: keyof typeof TRANSLATIONS,
 ): Record<SimpleSlug, ProcessedContent> {
+  // 폴더 slug → 원래 폴더명 (예: engineering/cloud → Cloud)
+  const folderNames = new Map<string, string>()
+  for (const [, file] of content) {
+    const slugDirs = path.posix.dirname(file.data.slug ?? "").split("/")
+    const pathDirs = path.posix.dirname(file.data.relativePath ?? "").split("/")
+    if (slugDirs.length !== pathDirs.length) continue
+    slugDirs.forEach((_, i) => {
+      folderNames.set(slugDirs.slice(0, i + 1).join("/"), pathDirs[i])
+    })
+  }
+
   // Create default folder descriptions
   const folderInfo: Record<SimpleSlug, ProcessedContent> = Object.fromEntries(
     [...folders].map((folder) => [
@@ -71,7 +82,7 @@ function computeFolderInfo(
       defaultProcessedContent({
         slug: joinSegments(folder, "index") as FullSlug,
         frontmatter: {
-          title: `${i18n(locale).pages.folderContent.folder}: ${folder}`,
+          title: folderNames.get(folder) ?? folder.split("/").pop() ?? folder,
           tags: [],
         },
       }),

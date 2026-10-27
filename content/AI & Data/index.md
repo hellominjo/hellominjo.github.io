@@ -1,6 +1,8 @@
 ---
 type: index
 date: 2026-10-01
-title: 📚 Study Notes
+order: 1
+slug: ai-data
+title: AI & Data
 ---
 LLM · Agent · Machine Learning

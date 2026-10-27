@@ -4,10 +4,7 @@ description: 안드로이드 앱 자동화 테스트 방법 소개
 permalink: automation-testing-claude-mcp
 created: 2026-08-08
 draft:
-tags:
-  - aos
-  - 자동화
-  - quartz
+tags: [AOS, ai-data, 자동화, Claude, MCP, Appium]
 ---
 ## 안드로이드 앱 자동화 : Claude + Appium MCP 설정 가이드
 

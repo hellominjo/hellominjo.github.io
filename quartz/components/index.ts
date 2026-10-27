@@ -51,3 +51,8 @@ export {
   Flex,
   ConditionalRender,
 }
+
+export { default as LabHero } from "./LabHero"
+export { default as ResearchIndex } from "./ResearchIndex"
+export { default as LabArticleList } from "./LabArticleList"
+export { default as LabHeader } from "./LabHeader"

@@ -136,6 +136,34 @@
       "contentDigest": "1e681d0819bbee7fe82b0bf1ff04ea5bf1d16d4766472b2eb10d0bab63f02e19",
       "providerUserMessageId": "4db2f159-7f0d-4f85-8f6f-eca1aeb5f071",
       "providerAssistantMessageId": "3c98d11c-81eb-4e1c-9ec8-19700aabdcea"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "msg-1793108777631-j62wxou",
+      "userTurnOrdinal": 9,
+      "state": "accepted",
+      "localMessageId": "msg-1793108777616-yg3jen7",
+      "timestamp": 1793108777616,
+      "rawDisplayText": "[[AI & Data/AI Agent/ai-agent-service.md|ai-agent-service]]  이 글을 참고해서 동일 한 포스팅으로 같은 폴더에 아래 2개 포스팅을 추가로 작성해줘.\n\n1. 기술을 배우는 방식에 대한 새로운 생각\n빠르게 변화하는 기술 환경에서 탐구와 실험을 이어가는 방법.\n\n2. 아이디어를 실제 디지털 제품으로 만드는 과정\n문제 정의, MVP 설계, 프로토타입 검증까지의 제품 개발 기록",
+      "canonicalText": "[[AI & Data/AI Agent/ai-agent-service.md|ai-agent-service]]  이 글을 참고해서 동일 한 포스팅으로 같은 폴더에 아래 2개 포스팅을 추가로 작성해줘.\n\n1. 기술을 배우는 방식에 대한 새로운 생각\n빠르게 변화하는 기술 환경에서 탐구와 실험을 이어가는 방법.\n\n2. 아이디어를 실제 디지털 제품으로 만드는 과정\n문제 정의, MVP 설계, 프로토타입 검증까지의 제품 개발 기록",
+      "images": [],
+      "contentDigest": "20009a683058725be1e173073837cd4aac78a47b36e13a91fe388f826970b4ba",
+      "providerUserMessageId": "53534e19-3dc4-4660-ac0b-2255c1e223ee",
+      "providerAssistantMessageId": "7c91a674-5574-4511-ad13-9780253f7ffa"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "msg-1793109256695-9qcbzeg",
+      "userTurnOrdinal": 10,
+      "state": "accepted",
+      "localMessageId": "msg-1793109256682-8smmv8m",
+      "timestamp": 1793109256682,
+      "rawDisplayText": "ideas-to-product는 사용자 원칙을 중심으로 이야기하고, 관련 근거가 있으면 추가해줘.",
+      "canonicalText": "ideas-to-product는 사용자 원칙을 중심으로 이야기하고, 관련 근거가 있으면 추가해줘.",
+      "images": [],
+      "contentDigest": "7100fc7271d85ca890529c3f1067f5b28fb72b85985314cac9125cdda51303fc",
+      "providerUserMessageId": "5141b1b7-ce6c-4254-8a54-6414a8df0f83",
+      "providerAssistantMessageId": "4c0a7797-30d1-470e-bb04-8e932e8a5e41"
     }
   ]
 }

@@ -1,3 +1,1407 @@
+
 @use "./base.scss";
 
-// put your custom CSS here!
+/* ==========================================================
+   HELLOMINJO — Research & Engineering Lab
+   Quartz v4.5.2 / Custom Styles
+   ========================================================== */
+
+/* 01. DESIGN TOKENS */
+
+:root {
+  --lab-bg: #f8f8f8;
+  --lab-surface: #ffffff;
+  --lab-text: #141414;
+  --lab-muted: #777777;
+  --lab-subtle: #aaaaaa;
+  --lab-border: #e4e4e4;
+  --lab-tag: #3d6bb3;
+  --lab-link: #3d6bb3;
+  --lab-header-height: 72px;
+  --lab-content-width: 1280px;
+  --lab-article-width: 800px;
+  /* 모든 페이지 공통 좌우 여백 (헤더 · 본문 · 사이드바 · footer 기준선) */
+  --lab-side-padding: clamp(24px, 4vw, 64px);
+  --lab-radius: 8px;
+}
+
+[saved-theme="dark"] {
+  --lab-bg: #161618;
+  --lab-surface: #202023;
+  --lab-text: #ebebec;
+  --lab-muted: #a5a5a5;
+  --lab-subtle: #777777;
+  --lab-border: #393639;
+  --lab-tag: #8cb0e8;
+  --lab-link: #8cb0e8;
+}
+
+/* 02. GLOBAL */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--lab-bg);
+  color: var(--lab-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  transition: color 0.2s ease;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.page {
+  width: 100%;
+  max-width: none !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* 03. QUARTZ LAYOUT
+   One content column + full-width header.
+*/
+
+@media (min-width: 1200px) {
+  .page > #quartz-body {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-areas:
+      "grid-header"
+      "grid-center"
+      "grid-footer" !important;
+    column-gap: 0 !important;
+    row-gap: 0;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+}
+
+/* Header container */
+
+/* .page-header는 .center 안에 렌더링됨 → base.scss의 상단 margin(6rem) 제거 */
+.page > #quartz-body .center > .page-header {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  margin: 0 0 48px;
+  padding: 0;
+}
+
+/* 헤더를 제외한 본문 영역만 안쪽으로 */
+.page > #quartz-body .center > :not(.page-header),
+.page > #quartz-body .center > .page-header > .popover-hint {
+  width: auto;
+  margin-inline: var(--lab-content-inset, 24px);
+}
+
+/* Quartz Header 컴포넌트의 header { margin: 2rem 0 } 제거 */
+.page > #quartz-body .page-header > header,
+.page > #quartz-body .page-header .lab-header {
+  margin: 0;
+}
+
+/* Main content */
+
+#quartz-body > .center {
+  grid-area: grid-center;
+  width: 100%;
+  min-width: 0;
+  max-width: var(--lab-content-width);
+  margin: 0 auto;
+  padding: 0 var(--lab-side-padding) 96px;
+}
+
+/* Footer */
+
+#quartz-body > .page-footer {
+  grid-area: grid-footer;
+  width: 100%;
+  max-width: var(--lab-content-width);
+  margin: 0 auto;
+  padding: 32px 40px;
+}
+
+/* 홈 판별은 body[data-slug="index"] 사용
+   (:has(.lab-hero)는 홈 링크 popover가 body에 붙으면 다른 페이지에서도 참이 됨) */
+
+/* Right sidebar (Graph · TOC)
+   index 제외 페이지, 데스크톱에서만 표시.
+   헤더는 전체 폭 유지 → .center는 두 열을 모두 차지하고,
+   사이드바는 2열에 겹쳐 배치 + 본문은 오른쪽 공간을 비움 */
+
+#quartz-body > .sidebar.right {
+  display: none !important;
+}
+
+@media (min-width: 1200px) {
+  body:not([data-slug="index"]):not([data-slug="articles"]) .page > #quartz-body {
+    --lab-right-width: 280px;
+    --lab-right-gap: 48px;
+
+    grid-template-columns: minmax(0, 1fr) var(--lab-right-width) !important;
+    grid-template-areas:
+      "grid-header grid-header"
+      "grid-center grid-center"
+      "grid-footer grid-footer" !important;
+  }
+
+  body:not([data-slug="index"]):not([data-slug="articles"]) #quartz-body > .center {
+    max-width: none;
+  }
+
+  body:not([data-slug="index"]):not([data-slug="articles"]) .page > #quartz-body .center > :not(.page-header),
+  body:not([data-slug="index"]):not([data-slug="articles"]) .page > #quartz-body .center > .page-header > .popover-hint {
+    margin-right: calc(var(--lab-right-width) + var(--lab-right-gap));
+  }
+
+  body:not([data-slug="index"]):not([data-slug="articles"]) #quartz-body > .sidebar.right {
+    display: flex !important;
+    grid-area: 2 / 2 / 3 / 3;
+    align-self: start;
+    position: sticky;
+    top: 24px;
+    height: auto;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    /* 헤더(높이 + border 1px) 아래 Breadcrumbs 시작선에 맞춤 */
+    margin-top: calc(var(--lab-header-height) + 13px);
+    padding: 0 calc(var(--lab-side-padding) + var(--lab-content-inset, 24px)) 0 0;
+    gap: 32px;
+  }
+}
+
+/* 04. GLOBAL HEADER */
+
+/* base.scss의 a.internal 배경(홈 외 페이지) 제거 */
+.lab-header a.internal {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.lab-header {
+  position: relative;
+  width: 100%;
+  background: var(--lab-bg);
+  border-bottom: 1px solid var(--lab-border);
+}
+
+.lab-header__inner {
+  width: 100%;
+  min-height: var(--lab-header-height);
+  margin: 0;
+  /* 좌우 여백은 .center padding을 따름 (본문과 시작선 정렬) */
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.lab-header__brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 20px;
+}
+
+/* HELLOMINJO / LAB : 한 줄, 같은 크기 · 뒤쪽은 연한 회색 */
+.lab-header__logo {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  color: var(--lab-text) !important;
+  text-decoration: none !important;
+}
+
+.lab-header__logo strong,
+.lab-header__logo-sub {
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.lab-header__logo strong {
+  font-family: var(--headerFont);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.lab-header__logo-sub {
+  color: var(--lab-muted);
+  font-weight: 400;
+}
+
+/* Header navigation */
+
+.lab-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-left: auto;
+}
+
+.lab-header__nav a {
+  color: var(--lab-muted);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lab-header__nav a:hover {
+  color: var(--lab-text);
+}
+
+.lab-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Header buttons */
+
+.lab-header__menu,
+.lab-header__search,
+.lab-header__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--lab-text);
+  cursor: pointer;
+}
+
+.lab-header__menu:hover,
+.lab-header__icon:hover,
+.lab-header__search:hover {
+  background: var(--lab-border);
+}
+
+/* 아이콘 버튼: 회색 톤, hover 시 진하게 */
+.lab-header__icon {
+  color: var(--lab-muted);
+  text-decoration: none;
+}
+
+.lab-header__icon:hover {
+  color: var(--lab-text);
+}
+
+/* 테마 토글: 라이트에서 달, 다크에서 해 */
+.lab-theme-toggle__sun {
+  display: none;
+}
+
+[saved-theme="dark"] .lab-theme-toggle__moon {
+  display: none;
+}
+
+[saved-theme="dark"] .lab-theme-toggle__sun {
+  display: block;
+}
+
+.lab-header__menu {
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lab-header__menu span {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: currentColor;
+}
+
+/* 05. DRAWER OVERLAY */
+
+.lab-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease;
+}
+
+body.lab-drawer-open .lab-drawer-backdrop {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+body.lab-drawer-open {
+  overflow: hidden;
+}
+
+/* 06. QUARTZ EXPLORER DRAWER */
+
+#quartz-body > .sidebar.left {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  /* base.scss의 .sidebar.left { z-index: 1 }보다 우선해야 backdrop(1000) 위에 표시됨 */
+  z-index: 1001 !important;
+
+  display: flex !important;
+  flex-direction: column;
+  align-items: stretch;
+
+  width: min(340px, 88vw);
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 32px 24px;
+
+  background: var(--lab-bg);
+  border-right: 1px solid var(--lab-border);
+  box-shadow: 16px 0 48px rgba(0, 0, 0, 0.06);
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  transform: translateX(-105%);
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    transform 0.25s ease,
+    visibility 0.25s ease;
+}
+
+body.lab-drawer-open #quartz-body > .sidebar.left {
+  transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+#quartz-body > .sidebar.left .page-title {
+  margin-bottom: 20px;
+}
+
+#quartz-body > .sidebar.left .page-title a{
+  color: #222 !important;
+}
+
+
+#quartz-body > .sidebar.left .explorer {
+  width: 100%;
+  margin-top: 24px;
+}
+
+#quartz-body > .sidebar.left .explorer-content {
+  max-height: none;
+}
+
+/* Explorer typography */
+
+.explorer .folder-container,
+.explorer .folder-container a,
+.explorer .folder-container button {
+  font-size: 14px;
+}
+
+.explorer a {
+  color: var(--lab-muted);
+  text-decoration: none;
+}
+
+.explorer a:hover {
+  color: var(--lab-text);
+}
+
+/* Explore Labs (Explorer 아래 외부 링크) */
+.lab-links {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.lab-links__title {
+  width: 80%;
+  margin: 0 0 15px;
+  font-size: 1rem;
+  color: var(--dark);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--lab-border);
+}
+
+.lab-links__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lab-links__list li {
+  margin: 0 0 10px;
+}
+
+.lab-links__item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  color: var(--lab-text);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.lab-links__item span {
+  color: var(--lab-subtle);
+  font-weight: 400;
+}
+
+.lab-links__item:hover span {
+  color: var(--lab-text);
+}
+
+/* 07. HOME PAGE */
+
+body[data-slug="index"] #quartz-body > .center {
+  max-width: 1440px;
+  padding: 0 var(--lab-side-padding) 0;
+}
+
+body[data-slug="index"] #quartz-body > .center article {
+  width: 100%;
+  max-width: none;
+}
+
+/* 08. HERO */
+
+.lab-hero {
+  width: 100%;
+  padding: 24px 0 0px;
+}
+
+.lab-hero h1 {
+  margin: 0;
+  color: var(--lab-text);
+  font-size: clamp(64px, 7vw, 112px);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.075em;
+}
+
+.lab-hero p {
+  color: var(--lab-muted);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.lab-hero a {
+  color: var(--lab-text);
+}
+
+/* Hero 우측 그래픽 (FIG. 001) */
+@media (min-width: 1000px) {
+  .lab-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(32px, 4vw, 64px);
+  }
+
+  /* 타이틀보다 작게: 폭 제한 + 우측 정렬 */
+  .lab-hero__graphic {
+    justify-self: end;
+    width: 100%;
+    max-width: 520px;
+  }
+}
+
+.lab-hero__graphic {
+  position: relative;
+  aspect-ratio: 600 / 390;
+  overflow: hidden;
+  margin-top: 90px;
+}
+
+.lab-hero__graphic svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.lab-hero__grid-line {
+  stroke: var(--lab-border);
+}
+
+.lab-hero__axis {
+  stroke: var(--lab-subtle);
+}
+
+.lab-hero__orbit {
+  stroke: var(--lab-muted);
+}
+
+.lab-hero__dots {
+  fill: var(--lab-text);
+}
+
+.lab-hero .lab-hero__graphic-label {
+  position: absolute;
+  left: 18px;
+  bottom: 14px;
+  margin: 0;
+  font-family: var(--codeFont);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--lab-muted);
+}
+
+@media (max-width: 999px) {
+  .lab-hero__graphic {
+    margin-top: 40px;
+  }
+}
+
+/* 09. RESEARCH CARDS */
+
+.lab-research-index,
+.research-index {
+  width: 100%;
+}
+
+.lab-research-index h2,
+.research-index h2 {
+  margin-bottom: 24px;
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 750;
+  letter-spacing: -0.045em;
+}
+
+.lab-research-index .research-grid,
+.research-index .research-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.lab-research-index .research-card,
+.research-index .research-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+  padding: 24px;
+
+  background: transparent;
+  border: 1px solid var(--lab-border);
+  border-radius: var(--lab-radius);
+
+  color: var(--lab-text);
+  text-decoration: none;
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.lab-research-index .research-card:hover,
+.research-index .research-card:hover {
+  border-color: var(--lab-muted);
+  transform: translateY(-2px);
+}
+
+/* 10. LATEST ARTICLES */
+
+.lab-article-list {
+  width: 100%;
+}
+
+.lab-article-list h2 {
+  margin-bottom: 28px;
+  color: var(--lab-text);
+  font-size: 32px;
+  font-weight: 750;
+  letter-spacing: -0.04em;
+}
+
+.lab-article-list a {
+  color: var(--lab-text);
+  text-decoration: none;
+}
+
+.lab-article-list a:hover {
+  color: var(--lab-muted);
+}
+
+.lab-article-list .article-item {
+  padding: 24px 0;
+  border-top: 1px solid var(--lab-border);
+}
+
+.lab-article-list .article-item:last-child {
+  border-bottom: 1px solid var(--lab-border);
+}
+
+.lab-article-list .article-date,
+.lab-article-list .article-description {
+  color: var(--lab-muted);
+  font-size: 13px;
+}
+
+/* 11. CATEGORY / FOLDER PAGE */
+
+body:not([data-slug="index"]) #quartz-body > .center {
+  max-width: 1040px;
+}
+
+body:not([data-slug="index"]) #quartz-body > .center article {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+}
+
+.page-listing {
+  margin-top: 40px;
+}
+
+.page-listing a {
+  color: var(--lab-text);
+  text-decoration: none;
+}
+
+/* 글 목록 항목만 (태그 목록 ul.tags > li 제외) */
+.page-listing li.section-li {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--lab-border);
+}
+
+/* 12. ARTICLE */
+
+article {
+  color: var(--lab-text);
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+
+article h1,
+article h2,
+article h3 {
+  color: var(--lab-text);
+  letter-spacing: -0.045em;
+}
+
+article h1 {
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 1.2;
+}
+
+article h2 {
+  margin-top: 2.8rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--lab-border);
+  font-size: 28px;
+}
+
+article h3 {
+  margin-top: 2rem;
+  font-size: 22px;
+}
+
+article p,
+article li {
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+article a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* 본문 링크(목차 · Related Notes 등): base.scss a.internal 배경 제거, 링크 색으로 표시 */
+article a.internal,
+article a.external {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  color: var(--lab-link);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+article a.internal:hover,
+article a.external:hover {
+  text-decoration: underline;
+}
+
+article a.internal[href^="#"] {
+  color: var(--lab-text);
+}
+
+article img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+article h5{
+  font-weight : 600;
+  color: var(--lab-muted);
+}
+
+article blockquote {
+  margin: 24px 0;
+  border-left: 2px solid var(--lab-muted);
+  color: #222 !important;
+}
+
+/* 13. ARTICLE TAGS */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li {
+  margin: 0;
+}
+
+/* 배경·테두리 없이 글자 색으로만 태그 표시
+   (TagList.tsx의 a.internal.tag-link 배경/padding 덮어쓰기) */
+.tags a,
+.tags a.internal.tag-link {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+
+  color: var(--lab-tag);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.tags a:hover,
+.tags a.internal.tag-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* 14. CODE BLOCKS */
+
+pre {
+  border: 1px solid var(--lab-border);
+  border-radius: 8px;
+}
+
+code {
+  font-family: var(--codeFont);
+}
+
+article :not(pre) > code {
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: var(--lab-border);
+  font-size: 0.88em;
+}
+
+/* 15. TABLES */
+
+article table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+article th,
+article td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--lab-border);
+}
+
+article th {
+  font-weight: 650;
+}
+
+/* 16. BREADCRUMBS / METADATA */
+
+.breadcrumb-container {
+  margin-bottom: 24px;
+  color: var(--lab-muted);
+  font-size: 12px;
+}
+
+.content-meta {
+  margin-top: 12px;
+  margin-bottom: 20px;
+  color: var(--lab-subtle);
+  font-size: 12px;
+}
+
+/* 17. BACKLINKS / RECENT NOTES */
+
+.backlinks,
+.recent-notes {
+  max-width: none;
+  margin: 56px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--lab-border);
+}
+
+.backlinks h3,
+.recent-notes h3 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.backlinks a,
+.recent-notes a {
+  color: var(--lab-muted);
+  text-decoration: none;
+}
+
+/* 날짜 칸 줄바꿈 방지 (recentNotes.scss의 fit-content(8em) 대체) */
+.page .recent-notes > ul.recent-ul > li .section {
+  grid-template-columns: max-content 1fr;
+  column-gap: 24px;
+}
+
+.page .recent-notes > ul.recent-ul > li .section > .meta {
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Site footer: #quartz-body 직계 <footer> → 본문과 같은 시작선
+   좌우 여백 = .center padding + content inset */
+.page > #quartz-body > footer {
+  grid-area: grid-footer;
+  /* 1199px 이하 flex column에서 맨 아래 */
+  order: 3;
+  /* 좌우는 margin → border-top이 본문 폭(목록 구분선과 같은 선)으로 그려짐 */
+  /* base.scss의 min-width: 100%가 margin만큼 넘치게 함 */
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  margin: 0 calc(var(--lab-side-padding) + var(--lab-content-inset, 24px));
+  padding: 24px 0 3rem;
+  border-top: 1px solid var(--lightgray);
+  font-size: 13px;
+}
+
+.page > #quartz-body > footer p {
+  margin: 0 0 10px;
+}
+
+/* 본문 ↔ footer 간격은 footer padding-top 하나로 관리 */
+body[data-slug] .page > #quartz-body > .center {
+  padding-bottom: 0;
+}
+
+/* 홈: 백링크/Recent Notes가 없어 hr · page-footer가 빈 여백만 만듦 */
+body[data-slug="index"] .page > #quartz-body > .center > hr,
+body[data-slug="index"] .page > #quartz-body > .center > .page-footer,
+body[data-slug="articles"] .page > #quartz-body > .center > hr,
+body[data-slug="articles"] .page > #quartz-body > .center > .page-footer {
+  display: none;
+}
+
+body[data-slug="index"] .page > #quartz-body .center > .page-header {
+  margin-bottom: 0;
+}
+
+body[data-slug="index"] .lab-section:last-child,
+body[data-slug="articles"] .lab-section:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 1199px) {
+  body[data-slug] .page > #quartz-body > footer {
+    margin-inline: calc(24px + var(--lab-content-inset, 24px));
+  }
+}
+
+@media (max-width: 800px) {
+  body[data-slug] .page > #quartz-body > footer {
+    margin-inline: calc(20px + var(--lab-content-inset, 24px));
+  }
+}
+
+/* 18. RESPONSIVE */
+
+@media (max-width: 1199px) {
+  /* 본문 시작선을 햄버거 아이콘(버튼 padding 8px)과 정렬 */
+  :root {
+    --lab-content-inset: 8px;
+  }
+
+  .page > #quartz-body {
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    /* base.scss의 not($desktop) padding: 0 1rem 제거 → .center padding과 이중 여백 방지 */
+    padding: 0;
+  }
+
+  #quartz-body > .page-header {
+    order: 0;
+  }
+
+  #quartz-body > .center {
+    order: 1;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 24px 72px;
+  }
+
+  .page > #quartz-body .center > .page-header {
+    margin-bottom: 40px;
+  }
+
+  #quartz-body > .page-footer {
+    order: 2;
+  }
+
+  .lab-research-index .research-grid,
+  .research-index .research-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 800px) {
+  :root {
+    --lab-header-height: 60px;
+  }
+
+  .lab-header__inner {
+    min-height: 60px;
+    gap: 12px;
+  }
+
+  .lab-header__brand {
+    gap: 10px;
+  }
+
+  .lab-header__logo strong,
+  .lab-header__logo-sub {
+    font-size: 16px;
+  }
+
+  .lab-header__nav {
+    display: none;
+  }
+
+  #quartz-body > .center,
+  body[data-slug="index"] #quartz-body > .center {
+    padding: 0 20px 56px;
+  }
+
+  .page > #quartz-body .center > .page-header {
+    margin-bottom: 28px;
+  }
+
+  /* explorer.scss의 모바일 sticky top bar(padding: 1rem 0)보다 우선 */
+  /* 컴포넌트 CSS가 custom.scss보다 뒤에 붙으므로 body로 specificity를 한 단계 올림 */
+  /* base.scss 모바일 .sidebar.left { flex-direction: row; align-items: center } 도 함께 덮어씀 */
+  body .page > #quartz-body > .sidebar.left:has(.explorer) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.2rem;
+    margin: 0;
+    padding: 24px 18px;
+    background: var(--lab-bg);
+  }
+
+  /* MobileOnly(Spacer)가 남는 공간을 차지해 제목·검색이 아래로 밀리는 것 방지 */
+  #quartz-body > .sidebar.left > .spacer {
+    display: none;
+  }
+
+  /* Quartz 모바일 Explorer 모드(자체 햄버거 · 전체화면 오버레이) 끄고 드로어 안에서 데스크톱처럼 표시 */
+  #quartz-body > .sidebar.left .explorer,
+  #quartz-body > .sidebar.left .explorer.collapsed,
+  #quartz-body > .sidebar.left .explorer:not(.collapsed) {
+    order: 0;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: stretch;
+    align-self: stretch;
+    margin: 24px 0 0;
+  }
+
+  #quartz-body > .sidebar.left .explorer button.mobile-explorer {
+    display: none;
+  }
+
+  #quartz-body > .sidebar.left .explorer > .explorer-content {
+    position: static;
+    z-index: auto;
+    width: auto;
+    max-width: none;
+    height: auto;
+    max-height: none;
+    padding: 0;
+    background: transparent;
+    transform: none;
+    visibility: visible;
+  }
+
+  .lab-hero {
+    padding: 20px 0 0px;
+  }
+
+  .lab-hero h1 {
+    font-size: clamp(48px, 11vw, 72px);
+    padding-top : 15px;
+  }
+
+  .lab-hero p {
+    font-size: 14px;
+  }
+
+  .lab-article-list {
+    margin-top: 56px;
+  }
+
+  article h1 {
+    font-size: 34px;
+  }
+
+  article h2 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 520px) {
+  .lab-research-index .research-grid,
+  .research-index .research-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-research-index .research-card,
+  .research-index .research-card {
+    min-height: 140px;
+  }
+
+  .lab-header__actions {
+    gap: 4px;
+  }
+
+  article p,
+  article li {
+    font-size: 15px;
+  }
+}
+
+/* 19. ACCESSIBILITY */
+
+:focus-visible {
+  outline: 2px solid var(--lab-text);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+
+/* Lab components — future use */
+
+.lab-hero__eyebrow {
+  font-family: var(--codeFont);
+  color: var(--gray);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.lab-hero__title {
+  font-family: var(--headerFont);
+  font-size: clamp(2.7rem, 6vw, 6rem);
+  font-weight: 750;
+  line-height: 1.08;
+  letter-spacing: -0.07em;
+}
+
+.lab-hero__description {
+  color: var(--darkgray);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  max-width: 600px;
+  line-height: 1.8;
+}
+
+.lab-section {
+  margin: 5rem 0;
+}
+
+.lab-section__heading {
+  font-family: var(--headerFont);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: -0.045em;
+  padding-bottom: 1rem;
+}
+
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.lab-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 205px;
+  padding: 28px 24px 30px;
+  border: 1px solid var(--lab-border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--lab-text);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.lab-card:hover {
+  background: rgba(127, 127, 127, 0.07);
+}
+
+.lab-card__label {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--lab-muted);
+}
+
+.lab-card h3 {
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--lab-text);
+}
+
+.lab-card p {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--lab-muted);
+}
+
+@media (max-width: 1199px) {
+  .lab-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .lab-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-card {
+    min-height: 160px;
+  }
+}
+
+/* =========================================
+   Latest Articles
+   ========================================= */
+
+.lab-articles {
+  margin-top: 5rem;
+}
+
+.lab-article-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.lab-filter {
+  border: 1px solid var(--lightgray);
+  background: transparent;
+  color: var(--darkgray);
+  border-radius: 30px;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.lab-filter:hover {
+  border-color: var(--dark);
+}
+
+.lab-filter.active {
+  background: var(--dark);
+  color: var(--light);
+  border-color: var(--dark);
+}
+
+.lab-article-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.lab-article-item {
+  display: block;
+  position: relative;
+  padding: 1.6rem 0;
+  text-decoration: none !important;
+  color: var(--dark) !important;
+}
+
+/* base.scss의 a.internal 배경/padding 제거 (홈 외 페이지: /articles) */
+.lab-articles a.lab-article-item.internal {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* /articles: 헤더 바로 아래에서 시작 */
+body[data-slug="articles"] .lab-articles {
+  margin-top: 0;
+}
+
+/* /articles: "ARTICLES / 002" eyebrow 숨김 (홈에서는 표시) */
+body[data-slug="articles"] .lab-articles > .lab-hero__eyebrow {
+  display: none;
+}
+
+/* 보이는 항목 사이에만 구분선 (필터로 hidden 처리돼도 맨 위/아래 border 없음) */
+.lab-article-item:not([hidden]) ~ .lab-article-item:not([hidden]) {
+  border-top: 1px solid var(--lightgray);
+}
+
+.lab-article-item[hidden] {
+  display: none !important;
+}
+
+.lab-article-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.7rem;
+  color: #888;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.lab-category{
+  text-transform: uppercase;
+}
+
+.lab-article-item h3 {
+  margin: 0.8rem 2rem 0.5rem 0;
+  font-size: 1.15rem;
+  font-weight: 550 !important;
+  line-height: 1.5;
+}
+
+.lab-article-item p {
+  color: var(--darkgray);
+  font-size: 0.85rem;
+  line-height: 1.5;  
+  font-weight: 500;
+}
+
+.lab-article-arrow {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray);
+  font-size: 1.1rem;
+}
+
+.lab-article-item:hover h3 {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.lab-empty {
+  color: var(--gray);
+  font-size: 0.9rem;
+  padding: 2rem 0;
+}
+
+@media (max-width: 800px) {
+  .lab-navigation {
+    margin-top: 1rem;
+  }
+
+  .lab-articles {
+    margin-top: 3.5rem;
+  }
+
+  .lab-article-item {
+    padding: 1.25rem 0;
+  }
+
+  .lab-article-item h3 {
+    font-size: 1rem;
+  }
+}
+
+/* =========================================
+   Bradcrumb Margin
+   ========================================= */
+
+.breadcrumb-container {
+    margin: 1.75rem 0 0;
+}
+
+footer a{
+    font-weight: 500;
+}
+
+.page .recent-notes>ul.recent-ul>li .section>.meta,
+.page-listing li > .section > .meta > time,
+.explorer-content .folder-outer>ul > li > a {
+   font-size : 0.85rem;
+}
+
+.explorer-content .folder-outer>ul > li > a:hover{
+   text-decoration: underline;
+}
+
+.article-title{
+  font-size : 2rem !important;
+}

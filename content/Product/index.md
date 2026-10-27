@@ -1,6 +1,8 @@
 ---
 type: index
 date: 2026-10-01
-title: ✨ Product
+order: 3
+title: Product
 ---
+
 UI/UX · Strategy · Prototypes
