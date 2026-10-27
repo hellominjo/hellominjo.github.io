@@ -1,7 +1,7 @@
 ---
 title: About
 description: 기술과 서비스, AI와 데이터에 관한 탐구와 실험을 기록합니다.
-date: 2026-05-16
+date: 2026-05-11
 aliases:
   - About
 ---

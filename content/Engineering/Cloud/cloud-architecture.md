@@ -94,5 +94,5 @@ async def handle_order_created(message):
 
 ## Related Notes
 
-- [AI Agent를 실제 서비스에 적용하며 고민한 것들](ai-agent-service.md) (AI & Data / Research)
-- [데이터 파이프라인을 설계하는 방법](data-pipeline.md) (AI & Data / Research)
+- [AI Agent를 실제 서비스에 적용하며 고민한 것들](ai-agent-service.md)
+- [데이터 파이프라인을 설계하는 방법](data-pipeline.md)
