@@ -406,7 +406,7 @@ body.lab-drawer-open #quartz-body > .sidebar.left {
 }
 
 #quartz-body > .sidebar.left .page-title a{
-  color: #222 !important;
+  color: var(--dark) !important;
 }
 
 
@@ -1015,7 +1015,27 @@ article th {
 .backlinks a,
 .recent-notes a {
   color: var(--lab-muted);
-  text-decoration: none;
+  text-decoration: none;  
+}
+
+/* Backlinks: 본문 Related Notes와 같은 불릿 · 링크 색 */
+.backlinks > ul.overflow > li {
+  font-size: 0.94rem;
+  line-height: 1.9;
+}
+
+.backlinks > ul.overflow > li::marker {
+  color: var(--lab-text);
+}
+
+.backlinks > ul.overflow > li > a.internal {
+  padding: 0;
+  color: var(--lab-text);
+  font-weight: 500;
+}
+
+.backlinks > ul.overflow > li > a.internal:hover {
+  text-decoration: underline;
 }
 
 /* 날짜 칸 줄바꿈 방지 (recentNotes.scss의 fit-content(8em) 대체) */
@@ -1251,11 +1271,13 @@ body[data-slug="articles"] .lab-section:last-child {
     grid-template-columns: fit-content(8em) 3fr;
     display: grid;
   }
+  li.section-li>.section h4{
+    font-size: 0.9rem;
+  }
   .lab-research-index .research-grid,
   .research-index .research-grid {
     grid-template-columns: 1fr;
   }
-
   .lab-research-index .research-card,
   .research-index .research-card {
     min-height: 140px;
@@ -1269,6 +1291,20 @@ body[data-slug="articles"] .lab-section:last-child {
   article li {
     font-size: 15px;
   }
+  article h5{
+     padding-bottom: 0rem;  
+  }
+  
+  article p, article ul > li{
+     font-size : 0.9rem;
+  }
+
+  .table-container table{
+    margin: 0;
+    padding: 0;
+    color : var(--dark);
+  }
+
 }
 
 /* 19. ACCESSIBILITY */
@@ -1576,6 +1612,9 @@ a.internal.tag-link {
 /* Recent Notes */
 .recent-notes>ul.recent-ul>li .section>.desc>h3>a, .recent-notes>ul.recent-ul>li .section>.desc>h4>a  {
    font-size : 0.9rem;
-   color: #1d1d1d;
+   color: var(--dark);
 }
 
+ul.toc-content.overflow {
+  font-size : 0.9rem;  
+}

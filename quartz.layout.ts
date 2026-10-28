@@ -93,7 +93,8 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     // 기존 Breadcrumbs, ArticleTitle, ContentMeta, TagList
     Component.ConditionalRender({
-      component: Component.Breadcrumbs(),
+      // 상세 페이지에서는 현재 글 제목 제외 (상위 경로만)
+      component: Component.Breadcrumbs({ showCurrentPage: false }),
       // /articles에도 표시 (홈만 제외)
       condition: (page) => !isHome(page),
     }),
