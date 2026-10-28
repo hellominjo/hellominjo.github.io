@@ -801,6 +801,30 @@ body:not([data-slug="index"]) #quartz-body > .center article {
   border-bottom: 1px solid var(--lab-border);
 }
 
+/* 폴더 페이지의 하위 카테고리 항목(is-folder: PageList.tsx)만 날짜 칸 숨김, 글 항목은 날짜 유지 */
+.folder-listing li.section-li.is-folder > .section {
+  grid-template-columns: 1fr auto;
+}
+
+.folder-listing li.section-li.is-folder > .section > .meta {
+  display: none;
+}
+
+/* 하위 카테고리 제목 우측 화살표 (Explore Labs 링크와 동일 스타일) */
+.folder-listing li.section-li.is-folder > .section > .desc a::after {
+  content: "↗";
+  margin-left: 6px;
+  color: var(--lab-text);
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+/* hover 시 카테고리명 · 화살표 함께 흐리게 */
+.folder-listing li.section-li.is-folder > .section > .desc a:hover,
+.folder-listing li.section-li.is-folder > .section > .desc a:hover::after {
+  color: var(--lab-subtle);
+}
+
 /* 12. ARTICLE */
 
 article {
@@ -1031,7 +1055,6 @@ body[data-slug] .page > #quartz-body > .center {
   padding-bottom: 0;
 }
 
-/* 홈: 백링크/Recent Notes가 없어 hr · page-footer가 빈 여백만 만듦 */
 body[data-slug="index"] .page > #quartz-body > .center > hr,
 body[data-slug="index"] .page > #quartz-body > .center > .page-footer,
 body[data-slug="articles"] .page > #quartz-body > .center > hr,
@@ -1222,7 +1245,11 @@ body[data-slug="articles"] .lab-section:last-child {
 
 @media (max-width: 520px) {
   .lab-hero figure {
-    margin: 10px;
+    margin: 0px 2px 0;
+  }
+  li.section-li>.section {
+    grid-template-columns: fit-content(8em) 3fr;
+    display: grid;
   }
   .lab-research-index .research-grid,
   .research-index .research-grid {
@@ -1529,3 +1556,26 @@ footer a{
 .article-title{
   font-size : 2rem !important;
 }
+
+/* Tag */
+a.internal.tag-link {
+    border-radius: 50px;
+    margin: 0 .1rem;
+    font-size: 0.9rem;
+}
+
+.page-listing p {
+   font-size : 14px;
+}
+
+/* Page Listing */
+.page-listing li.section-li:last-child {
+    border-bottom: 0px;
+}
+
+/* Recent Notes */
+.recent-notes>ul.recent-ul>li .section>.desc>h3>a, .recent-notes>ul.recent-ul>li .section>.desc>h4>a  {
+   font-size : 0.9rem;
+   color: #1d1d1d;
+}
+

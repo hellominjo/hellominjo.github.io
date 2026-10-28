@@ -48,7 +48,7 @@ export default ((userOpts?: Partial<Options>) => {
                 <div class="section">
                   {page.dates && (
                     <p class="meta">
-                      <Date date={getDate(cfg, page)!} locale={cfg.locale} />
+                      <Date date={getDate(cfg, page)!} locale={cfg.locale} format="iso" />
                     </p>
                   )}
                   <div class="desc">

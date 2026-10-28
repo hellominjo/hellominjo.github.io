@@ -17,8 +17,8 @@ tags:
 
 ### 주요 기능
 
-- 마크다운 파일을 HTML로 변환
-- 백링크 및 그래프 뷰 지원
+- Martkdown 파일을 HTML로 변환
+- Backlink 및 Graph View 지원
 - 빠른 검색 기능
 
 ### 시작하는 법

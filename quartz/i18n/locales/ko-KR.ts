@@ -22,8 +22,8 @@ export default {
       quote: "인용",
     },
     backlinks: {
-      title: "백링크",
-      noBacklinksFound: "백링크가 없습니다.",
+      title: "Backlinks",
+      noBacklinksFound: "No backlinks",
     },
     themeToggle: {
       lightMode: "라이트 모드",
@@ -33,16 +33,16 @@ export default {
       title: "리더 모드",
     },
     explorer: {
-      title: "탐색기",
+      title: "Explorer",
     },
     footer: {
       createdWith: "Created with",
     },
     graph: {
-      title: "그래프 뷰",
+      title: "Graph View",
     },
     recentNotes: {
-      title: "최근 게시글",
+      title: "Latest Article",
       seeRemainingMore: ({ remaining }) => `${remaining}건 더보기 →`,
     },
     transcludes: {
@@ -50,11 +50,11 @@ export default {
       linkToOriginal: "원본 링크",
     },
     search: {
-      title: "검색",
+      title: "Search",
       searchBarPlaceholder: "검색어를 입력하세요",
     },
     tableOfContents: {
-      title: "목차",
+      title: "Table of Contents",
     },
     contentMeta: {
       readingTime: ({ minutes }) => `${minutes} min read`,
@@ -72,14 +72,14 @@ export default {
     },
     folderContent: {
       folder: "폴더",
-      itemsUnderFolder: ({ count }) => `${count}건의 항목`,
+      itemsUnderFolder: ({ count }) => `Total : ${count}`,
     },
     tagContent: {
       tag: "태그",
       tagIndex: "태그 목록",
-      itemsUnderTag: ({ count }) => `${count}건의 항목`,
+      itemsUnderTag: ({ count }) => `총 ${count}개`,
       showingFirst: ({ count }) => `처음 ${count}개의 태그`,
-      totalTags: ({ count }) => `총 ${count}개의 태그를 찾았습니다.`,
+      totalTags: ({ count }) => `All Tags (${count})`,
     },
   },
 } as const satisfies Translation

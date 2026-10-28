@@ -5,6 +5,7 @@ import { QuartzPluginData } from "../plugins/vfile"
 interface Props {
   date: Date
   locale?: ValidLocale
+  format?: "iso"
 }
 
 export type ValidDateType = keyof Required<QuartzPluginData>["dates"]
@@ -26,6 +27,16 @@ export function formatDate(d: Date, locale: ValidLocale = "en-US"): string {
   })
 }
 
-export function Date({ date, locale }: Props) {
-  return <time datetime={date.toISOString()}>{formatDate(date, locale)}</time>
+// 목록용 날짜 포맷: 2026-09-09
+export function formatISODate(d: Date): string {
+  const pad = (n: number) => String(n).padStart(2, "0")
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`
+}
+
+export function Date({ date, locale, format }: Props) {
+  return (
+    <time datetime={date.toISOString()}>
+      {format === "iso" ? formatISODate(date) : formatDate(date, locale)}
+    </time>
+  )
 }
