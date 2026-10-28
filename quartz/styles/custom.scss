@@ -895,8 +895,9 @@ article img {
 }
 
 article h5{
-  font-weight : 600;
+  font-weight : 500;
   color: var(--lab-muted);
+  font-style: italic;
 }
 
 article blockquote {
@@ -1299,12 +1300,6 @@ body[data-slug="articles"] .lab-section:last-child {
      font-size : 0.9rem;
   }
 
-  .table-container table{
-    margin: 0;
-    padding: 0;
-    color : var(--dark);
-  }
-
 }
 
 /* 19. ACCESSIBILITY */
@@ -1615,6 +1610,18 @@ a.internal.tag-link {
    color: var(--dark);
 }
 
+/* TOC */
 ul.toc-content.overflow {
   font-size : 0.9rem;  
+}
+
+/* TABLE */
+.table-container table{
+  margin: 0;
+  padding: 0;
+  color : var(--dark);
+}
+
+tr, td{
+  color : var(--dark) !important;
 }
