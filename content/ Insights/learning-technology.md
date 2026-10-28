@@ -9,7 +9,7 @@ tags: [Tech, Engineering, Idea]
 
 ##### Learning · Experiment · Engineering
 
-도구의 수명이 짧아진 환경에서, 지식을 쌓는 대신 검증하는 방식으로 학습을 다시 설계한 기록.
+기술의 빠른 변화에 따라 Tool의 수명이 짧아진 환경에서, 지식을 쌓는 대신 검증하는 방식으로 다시 설계하며 고민해온 기록들
 
 ---
 
