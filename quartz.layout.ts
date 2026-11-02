@@ -92,7 +92,7 @@ export const defaultContentPageLayout: PageLayout = {
         condition: (page) => page.fileData.slug === "index",
     }),  
     Component.ConditionalRender({
-        component: LabArticleList({ limit: 3 }),
+        component: LabArticleList({ limit: 5 }),
         condition: isHome,
     }),
     // 기존 Breadcrumbs, ArticleTitle, ContentMeta, TagList
