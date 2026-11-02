@@ -3,7 +3,8 @@ title: AI EdTech
 description: AI와 교육이 만나는 지점의 학습 기록 — 지능형 학습 지원, 이러닝, 행동지원 체계
 date: 2026-11-02
 draft: false
-tags: [AI EdTech, 교육]
+tags:
+  - 교육
 ---
 ## AI EdTech
 

@@ -1,5 +1,5 @@
 ---
-title: Claude Code 설치와 초기 설정
+title: Claude Code 설치와 초기 설정 방법
 description: 터미널에서 동작하는 코딩 에이전트 Claude Code의 설치, 인증, 프로젝트 초기 설정 기록
 permalink: claude-code-setup
 date: 2026-10-23
