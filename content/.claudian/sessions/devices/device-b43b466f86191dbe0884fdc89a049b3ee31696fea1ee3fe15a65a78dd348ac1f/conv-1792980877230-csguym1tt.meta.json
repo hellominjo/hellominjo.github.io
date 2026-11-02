@@ -4,7 +4,7 @@
   "title": "Add properties in guide format",
   "titleGenerationStatus": "success",
   "createdAt": 1792980877240,
-  "lastActivityAt": 1793109370312,
+  "lastActivityAt": 1793596433511,
   "sessionId": "3895bfea-8be4-4b3b-9188-4f70e69e7727",
   "selectedModel": "opus",
   "providerState": {
@@ -14,11 +14,11 @@
   "usage": {
     "model": "opus",
     "inputTokens": 2,
-    "cacheCreationInputTokens": 4546,
-    "cacheReadInputTokens": 76913,
+    "cacheCreationInputTokens": 649,
+    "cacheReadInputTokens": 99943,
     "contextWindow": 1000000,
-    "contextTokens": 81461,
-    "percentage": 8,
+    "contextTokens": 100594,
+    "percentage": 10,
     "contextWindowIsAuthoritative": true
   }
 }

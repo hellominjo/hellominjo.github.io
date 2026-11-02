@@ -13,9 +13,12 @@ export default (() => {
     externalResources,
     ctx,
   }: QuartzComponentProps) => {
+    const isHome = fileData.slug === "index"
     const titleSuffix = cfg.pageTitleSuffix ?? ""
-    const title =
-      (fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title) + titleSuffix
+    // 홈은 사이트 이름(pageTitle)만: HELLOMINJO
+    const title = isHome
+      ? cfg.pageTitle
+      : (fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title) + titleSuffix
     const description =
       fileData.frontmatter?.socialDescription ??
       fileData.frontmatter?.description ??
@@ -29,8 +32,11 @@ export default (() => {
     const iconPath = joinSegments(baseDir, "static/favicon.ico")
 
     // Url of current page
+    // 홈은 /index 대신 사이트 루트
     const socialUrl =
-      fileData.slug === "404" ? url.toString() : joinSegments(url.toString(), fileData.slug!)
+      fileData.slug === "404" || isHome
+        ? url.toString()
+        : joinSegments(url.toString(), fileData.slug!)
 
     const usesCustomOgImage = ctx.cfg.plugins.emitters.some(
       (e) => e.name === CustomOgImagesEmitterName,
@@ -57,6 +63,7 @@ export default (() => {
         <meta name="og:site_name" content={cfg.pageTitle}></meta>
         <meta property="og:title" content={title} />
         <meta property="og:type" content="website" />
+        <meta property="og:locale" content={cfg.locale.replace("-", "_")} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
@@ -70,7 +77,7 @@ export default (() => {
             <meta name="twitter:image" content={ogImageDefaultPath} />
             <meta
               property="og:image:type"
-              content={`image/${getFileExtension(ogImageDefaultPath) ?? "png"}`}
+              content={`image/${getFileExtension(ogImageDefaultPath)?.slice(1) ?? "png"}`}
             />
           </>
         )}
@@ -80,6 +87,7 @@ export default (() => {
             <meta property="twitter:domain" content={cfg.baseUrl}></meta>
             <meta property="og:url" content={socialUrl}></meta>
             <meta property="twitter:url" content={socialUrl}></meta>
+            {fileData.slug !== "404" && <link rel="canonical" href={socialUrl} />}
           </>
         )}
 

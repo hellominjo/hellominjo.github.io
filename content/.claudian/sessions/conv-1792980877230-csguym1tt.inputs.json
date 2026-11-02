@@ -164,6 +164,47 @@
       "contentDigest": "7100fc7271d85ca890529c3f1067f5b28fb72b85985314cac9125cdda51303fc",
       "providerUserMessageId": "5141b1b7-ce6c-4254-8a54-6414a8df0f83",
       "providerAssistantMessageId": "4c0a7797-30d1-470e-bb04-8e932e8a5e41"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "msg-1793596091937-w0ieurx",
+      "userTurnOrdinal": 11,
+      "state": "accepted",
+      "localMessageId": "msg-1793596091929-p2hqecj",
+      "timestamp": 1793596091929,
+      "rawDisplayText": "현재 전체 폴더 기준으로 내가 더 작성하면 좋은 글들이 뭐가 있을까?",
+      "canonicalText": "현재 전체 폴더 기준으로 내가 더 작성하면 좋은 글들이 뭐가 있을까?",
+      "images": [],
+      "contentDigest": "d3e379bc308e85dc4f82f163c24b7caaf7c97ac8f41000cc0889293c83255f80",
+      "providerUserMessageId": "38d42f16-9864-4f02-b0c7-ce834475118b",
+      "providerAssistantMessageId": "50dada17-ed71-4fb4-a23c-3d6f11811191"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "msg-1793596279419-k42q7xm",
+      "userTurnOrdinal": 12,
+      "state": "accepted",
+      "localMessageId": "msg-1793596279411-sae3cu7",
+      "timestamp": 1793596279411,
+      "rawDisplayText": "ai-agent-service.md의 tags와 Android 2편 date 추가해줘",
+      "canonicalText": "ai-agent-service.md의 tags와 Android 2편 date 추가해줘",
+      "images": [],
+      "contentDigest": "4a53e9764994497a4f589773e3bbf070d0600e292737bd3947b60b219615cb9e",
+      "providerUserMessageId": "812c991e-9774-48c6-8406-9cc5ff7cfdcb",
+      "providerAssistantMessageId": "b8827696-6ce1-4d55-9697-6a3d3b55d01f"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "msg-1793596433520-4l6amnx",
+      "userTurnOrdinal": 13,
+      "state": "accepted",
+      "localMessageId": "msg-1793596433511-z6zi62c",
+      "timestamp": 1793596433511,
+      "rawDisplayText": "Study Notes에 읽을 자료 5편 추가해줘. Study Notes는 설치 환경이나 LLM 연동 같이 환경 세팅이나 가입 방법 노하우 같은 글이 필요해",
+      "canonicalText": "Study Notes에 읽을 자료 5편 추가해줘. Study Notes는 설치 환경이나 LLM 연동 같이 환경 세팅이나 가입 방법 노하우 같은 글이 필요해",
+      "images": [],
+      "contentDigest": "7a9b7938a0de5e3e2d481d1dbbc003ec8094a82b189f4b9f968d5380bb53eea9",
+      "providerUserMessageId": "34dcabae-16e5-4de4-a396-e3c90d6d706d"
     }
   ]
 }

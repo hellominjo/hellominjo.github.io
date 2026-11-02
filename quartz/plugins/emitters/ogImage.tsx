@@ -74,8 +74,11 @@ async function processOgImage(
   const cfg = ctx.cfg.configuration
   const slug = fileData.slug!
   const titleSuffix = cfg.pageTitleSuffix ?? ""
+  // 홈은 사이트 이름(pageTitle)만 (Head.tsx와 동일)
   const title =
-    (fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title) + titleSuffix
+    slug === "index"
+      ? cfg.pageTitle
+      : (fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title) + titleSuffix
   const description =
     fileData.frontmatter?.socialDescription ??
     fileData.frontmatter?.description ??
@@ -158,7 +161,8 @@ export const CustomOgImages: QuartzEmitterPlugin<Partial<SocialImageOptions>> = 
               : undefined
             const defaultOgImagePath = `https://${baseUrl}/static/og-image.png`
             const ogImagePath = userDefinedOgImagePath ?? generatedOgImagePath ?? defaultOgImagePath
-            const ogImageMimeType = `image/${getFileExtension(ogImagePath) ?? "png"}`
+            // getFileExtension은 ".webp"처럼 점을 포함하므로 제거 (image/webp)
+            const ogImageMimeType = `image/${getFileExtension(ogImagePath)?.slice(1) ?? "png"}`
             return (
               <>
                 {!userDefinedOgImagePath && (
