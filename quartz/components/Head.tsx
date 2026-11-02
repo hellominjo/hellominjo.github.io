@@ -94,6 +94,8 @@ export default (() => {
         <link rel="icon" href={iconPath} />
         <meta name="description" content={description} />
         <meta name="generator" content="Quartz" />
+        {/* Google Search Console 사이트 소유 확인 */}
+        <meta name="google-site-verification" content="9Edpi5FnMOeutB92RdmaNU3a1T9gTA7uYLufvHKS7-w" />
 
         {/* Google AdSense 자동 광고 (게시자 ID: quartz/util/adsense.ts) */}
         {ADSENSE_CLIENT && (

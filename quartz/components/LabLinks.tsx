@@ -2,7 +2,9 @@ import script from "./scripts/labLinks.inline"
 import type {
   QuartzComponent,
   QuartzComponentConstructor,
+  QuartzComponentProps,
 } from "./types"
+import { FullSlug, resolveRelative } from "../util/path"
 
 // 왼쪽 메뉴 Explorer 아래 외부 Lab 링크
 const labs = [
@@ -12,8 +14,18 @@ const labs = [
   { title: "EDU Studio", href: "https://hellominjo.github.io/edu-studio" },
 ]
 
-const LabLinks: QuartzComponent = () => {
+const LabLinks: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
+  const home = resolveRelative(fileData.slug!, "index" as FullSlug)
+
   return (
+    <>
+    {/* 헤더 주 메뉴가 숨겨지는 모바일(≤800px)에서만 표시 — LabHeader.tsx와 동일한 링크 */}
+    <nav class="lab-drawer-nav" aria-label="주 메뉴">
+      <a href={home} class="internal" data-no-popover="true">Home</a>
+      <a href="/articles" class="internal" data-no-popover="true">Articles</a>
+      <a href="/tags" class="internal" data-no-popover="true">Tags</a>
+      <a href="/about" class="internal" data-no-popover="true">About</a>
+    </nav>
     <nav class="lab-links" aria-label="Explore Labs">
       <h2 class="lab-links__title">Explore Labs</h2>
       {/* 모바일 전용 드롭다운 선택 상자 */}
@@ -45,6 +57,7 @@ const LabLinks: QuartzComponent = () => {
         ))}
       </ul>
     </nav>
+    </>
   )
 }
 

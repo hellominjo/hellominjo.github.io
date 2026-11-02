@@ -526,7 +526,41 @@ body[data-slug="articles"] .center .page-header > .popover-hint > .search {
     grid-column: 1;
     grid-row: 3;
     width: 100%;
-    margin: 0 0 1.5rem;
+    margin: 10px 0 1.5rem;
+  }
+}
+
+/* drawer 주 메뉴 (Home · Articles · Tags · About): 헤더 메뉴가 숨겨지는 모바일에서만 */
+.lab-drawer-nav {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  /* 가로 배치, footer 링크(GitHub · E-mail)와 같은 글자 스타일 */
+  .lab-drawer-nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    width: 100%;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--lab-border);
+    opacity: 0.7;
+  }
+
+  /* base.scss a.internal 배경 · radius 제거 */
+  .lab-drawer-nav a.internal {
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    color: var(--secondary);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .lab-drawer-nav a.internal:hover {
+    text-decoration: underline;
   }
 }
 
@@ -1340,10 +1374,9 @@ body[data-slug="articles"] .lab-section:last-child {
     font-size: 14px;
   }
 
-  .lab-article-list {
-    margin-top: 56px;
-  }
-
+  // .lab-article-list {
+  //   margin-top: 56px;
+  // }
 
   .lab-hero__description {
     width: 255px;
