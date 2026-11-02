@@ -17,8 +17,9 @@ const categories = [
   { label: "DevOps", tag: "devops" },
 ]
 
-// 글 목록 제외 기준(위치): content 최상위 단독 페이지(About, articles 등) · Archive 폴더
-const isListedArticle = (slug: string) => slug.includes("/") && !slug.startsWith("archive/")
+// 글 목록 제외 기준(위치): content 최상위 단독 페이지(About, articles 등) · 경로 중 Archive 폴더
+const isListedArticle = (slug: string) =>
+  slug.includes("/") && !slug.split("/").includes("archive")
 
 interface Options {
   // 표시 개수 (미지정 시 전체) — 홈 최신글용
@@ -35,6 +36,8 @@ const LabArticleList: QuartzComponent = ({
 }: QuartzComponentProps) => {
   const articles = allFiles
     .filter((file) => isListedArticle(file.slug ?? ""))
+    // frontmatter type: reference (참고자료) 제외
+    .filter((file) => file.frontmatter?.type !== "reference")
     // 폴더 index.md 제외
     .filter((file) => !file.slug?.endsWith("/index"))
     .filter((file) => file.frontmatter?.title)

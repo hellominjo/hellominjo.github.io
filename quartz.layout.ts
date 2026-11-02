@@ -75,7 +75,7 @@ export const sharedPageComponents: SharedLayout = {
     links: {
       GitHub: "https://github.com/hellominjo",
       "E-mail": "mailto:minjohello@gmail.com",
-      Privacy: "/privacy",
+      "Privacy Policy": "/privacy",
     },
   }),
 }

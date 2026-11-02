@@ -2,7 +2,7 @@
 title: 기술을 배우는 방식에 대한 새로운 생각
 description: 빠르게 변화하는 기술 환경에서 탐구와 실험을 이어가는 방법
 author: HELLOMINJO
-date: 2026-09-27
+date: 2026-10-24
 draft: false
 tags: [Tech, Engineering, Idea]
 ---

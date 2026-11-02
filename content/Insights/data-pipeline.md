@@ -2,7 +2,7 @@
 title: 데이터 파이프라인 설계하는 방법
 description: 데이터를 옮기는 것에서 끝나지 않고, 믿고 쓸 수 있는 데이터를 꾸준히 만들기 위한 파이프라인 설계 원칙과 구현 과정
 author: HELLOMINJO
-date: 2026-09-21
+date: 2026-10-29
 draft: false
 tags: [ai-data, Data Engineering, Tech, Platform, Architecture]
 ---

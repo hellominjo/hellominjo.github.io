@@ -2,7 +2,7 @@
 title: AI Agent를 실제 서비스에 적용하며 고민한 것들
 description: LLM을 연결하는 것에서 끝나지 않고, 안정적으로 동작하는 AI 제품을 만들기 위해 고려해야 할 고민과 전략
 author: HELLOMINJO
-date: 2026-10-08
+date: 2026-10-27
 draft: false
 tags:
   - ai-data
