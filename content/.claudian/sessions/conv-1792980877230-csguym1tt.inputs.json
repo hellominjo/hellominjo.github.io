@@ -204,7 +204,64 @@
       "canonicalText": "Study Notes에 읽을 자료 5편 추가해줘. Study Notes는 설치 환경이나 LLM 연동 같이 환경 세팅이나 가입 방법 노하우 같은 글이 필요해",
       "images": [],
       "contentDigest": "7a9b7938a0de5e3e2d481d1dbbc003ec8094a82b189f4b9f968d5380bb53eea9",
-      "providerUserMessageId": "34dcabae-16e5-4de4-a396-e3c90d6d706d"
+      "providerUserMessageId": "34dcabae-16e5-4de4-a396-e3c90d6d706d",
+      "providerAssistantMessageId": "2ac11d69-b706-42e4-a053-296b3a63ce42"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "msg-1793597219497-00v78d7",
+      "userTurnOrdinal": 14,
+      "state": "accepted",
+      "localMessageId": "msg-1793597219489-s03756p",
+      "timestamp": 1793597219489,
+      "rawDisplayText": "Data Analytics에 공공 API와 HR Analytics를 추가하려고 해",
+      "canonicalText": "Data Analytics에 공공 API와 HR Analytics를 추가하려고 해",
+      "images": [],
+      "contentDigest": "209e4fc5c0fea87c2dfb1227fca78ce2ff990a0d9f25a5977e6e581fe10e533e",
+      "providerUserMessageId": "9444a1c0-cb68-41d1-a991-bc7cec023200",
+      "providerAssistantMessageId": "89188251-4782-445a-947f-d833f1d0e880"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "msg-1793597857597-l0ejej5",
+      "userTurnOrdinal": 15,
+      "state": "accepted",
+      "localMessageId": "msg-1793597857589-3zw7aoc",
+      "timestamp": 1793597857589,
+      "rawDisplayText": "Data Analytics 밑에 공공 API 관련 폴더도 추가하고 HR Analytics와 같은 형식으로 정리해줘",
+      "canonicalText": "Data Analytics 밑에 공공 API 관련 폴더도 추가하고 HR Analytics와 같은 형식으로 정리해줘",
+      "images": [],
+      "contentDigest": "ee3e04b525b1d769a56b9a13bc24f2922292a733c58420baa9e6bdeac420bafd",
+      "providerUserMessageId": "727fc9d5-dd25-4cb4-bb93-c87b95256f9c",
+      "providerAssistantMessageId": "d83f9eb6-ee32-46b9-b1c5-bc4d63c05d96"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "msg-1793598159319-u5f9a6f",
+      "userTurnOrdinal": 16,
+      "state": "accepted",
+      "localMessageId": "msg-1793598159309-7xhm65k",
+      "timestamp": 1793598159309,
+      "rawDisplayText": "private 하위 Notes 폴더에 있는 내용들을 내 카테고리 및 작성 형식에 맞게 수정하려고 해.",
+      "canonicalText": "private 하위 Notes 폴더에 있는 내용들을 내 카테고리 및 작성 형식에 맞게 수정하려고 해.",
+      "images": [],
+      "contentDigest": "52f64183fad7a2350e9c1678e318a163d337031949319830ec93076d52761272",
+      "providerUserMessageId": "3215397c-fd56-48d9-9c07-0602351479c3",
+      "providerAssistantMessageId": "812ed385-3fba-43dc-ac40-758311eda5fa"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "msg-1793598717588-bbwg34e",
+      "userTurnOrdinal": 17,
+      "state": "accepted",
+      "localMessageId": "msg-1793598717576-11immne",
+      "timestamp": 1793598717576,
+      "rawDisplayText": "설명과 특정 사건 언급 개인 연구 이력 등은 제외해줘",
+      "canonicalText": "설명과 특정 사건 언급 개인 연구 이력 등은 제외해줘",
+      "images": [],
+      "contentDigest": "44e8dc9a7ef63ebd51aea4fd01569794862c3acabcec3bc8120aa2129e465923",
+      "providerUserMessageId": "c2fa4620-3d08-4810-a201-11dde1affd92",
+      "providerAssistantMessageId": "6536aeef-1264-4003-836f-fef9d61f725f"
     }
   ]
 }

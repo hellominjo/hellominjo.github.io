@@ -11,19 +11,23 @@ function initLabArticles() {
 
     const count = section.querySelector(".lab-articles__count")
     const pager = section.querySelector<HTMLElement>(".lab-pagination")
-    // data-page-size 없으면(홈) 페이징 없이 전체 표시
+    const empty = section.querySelector<HTMLElement>(".lab-empty")
+    // data-page-size 없으면(홈) 페이징 없이 표시, data-limit 있으면 필터 결과 중 최신 N개만
     const pageSize = Number(section.dataset.pageSize) || Infinity
+    const limit = Number(section.dataset.limit) || Infinity
 
     let selected = ""
     let page = 1
 
     const render = () => {
-      const matched = articles.filter((article) => {
-        const tags = (article.dataset.tags ?? "")
-          .split(",")
-          .map((tag) => tag.trim().toLowerCase())
-        return !selected || tags.includes(selected)
-      })
+      const matched = articles
+        .filter((article) => {
+          const tags = (article.dataset.tags ?? "")
+            .split(",")
+            .map((tag) => tag.trim().toLowerCase())
+          return !selected || tags.includes(selected)
+        })
+        .slice(0, limit)
 
       const pages = Math.max(1, Math.ceil(matched.length / pageSize))
       page = Math.min(page, pages)
@@ -36,6 +40,7 @@ function initLabArticles() {
       })
 
       if (count) count.textContent = String(matched.length)
+      if (empty) empty.hidden = matched.length > 0
       if (pager) renderPager(pager, pages)
     }
 

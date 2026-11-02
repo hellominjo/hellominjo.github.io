@@ -2,9 +2,11 @@
 title: 아이디어를 실제 디지털 제품으로 만드는 과정
 description: 사용자 원칙을 기준으로 문제를 정의하고, MVP 범위를 잘라내고, 프로토타입을 검증한 기록
 author: HELLOMINJO
-date: 2026-10-18
+date: 2026-10-06
 draft: false
-tags: [Product, MVP]
+tags:
+  - Product
+  - MVP
 ---
 
 ##### Product · MVP · Prototype

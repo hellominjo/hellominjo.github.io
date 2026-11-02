@@ -30,9 +30,11 @@ const rightComponents = [
 // 왼쪽 탐색기
 // sortFn / filterFn은 문자열로 직렬화돼 브라우저에서 실행됨 → 외부 변수 참조 불가
 const explorer = Component.Explorer({
-  // tags 폴더, /articles · /about 페이지 숨김
   filterFn: (node) =>
-    node.slugSegment !== "tags" && node.slugSegment !== "articles" && node.slugSegment !== "about",
+    node.slugSegment !== "tags" &&
+    node.slugSegment !== "articles" &&
+    node.slugSegment !== "about" &&
+    node.slugSegment !== "privacy",
   sortFn: (a, b) => {
     const order = ["ai-data", "engineering", "product", "insights", "archive", "study-notes"]
     // 내부 함수 선언 금지: esbuild가 __name()으로 감싸 브라우저에서 ReferenceError
@@ -73,6 +75,7 @@ export const sharedPageComponents: SharedLayout = {
     links: {
       GitHub: "https://github.com/hellominjo",
       "E-mail": "mailto:minjohello@gmail.com",
+      Privacy: "/privacy",
     },
   }),
 }

@@ -21,7 +21,8 @@ const categories = [
 const isListedArticle = (slug: string) => slug.includes("/") && !slug.startsWith("archive/")
 
 interface Options {
-  // 표시 개수 (미지정 시 전체) — 홈 최신글용, 나머지는 렌더링하지 않음
+  // 표시 개수 (미지정 시 전체) — 홈 최신글용
+  // 필터별로 최신 N개를 보여야 하므로 전체를 렌더링하고 labArticles.inline.ts에서 자름
   limit?: number
   // 페이지당 개수 — 전체를 렌더링하고 labArticles.inline.ts에서 페이징 (/articles)
   pageSize?: number
@@ -44,10 +45,13 @@ const LabArticleList: QuartzComponent = ({
       const dateB = b.dates?.created?.getTime() ?? 0
       return dateB - dateA
     })
-    .slice(0, opts?.limit)
 
   return (
-    <section class="lab-section lab-articles" data-page-size={opts?.pageSize}>
+    <section
+      class="lab-section lab-articles"
+      data-page-size={opts?.pageSize}
+      data-limit={opts?.limit}
+    >
       <p class="lab-hero__eyebrow">ARTICLES / 002</p>
       <h2 class="lab-section__heading">Latest Articles</h2>
 
@@ -105,9 +109,10 @@ const LabArticleList: QuartzComponent = ({
       {/* 페이지 번호는 labArticles.inline.ts에서 생성 */}
       {opts?.pageSize && <nav class="lab-pagination" aria-label="Articles pages"></nav>}
 
-      {articles.length === 0 && (
-        <p class="lab-empty">등록된 게시글이 없습니다.</p>
-      )}
+      {/* 필터 결과가 없을 때 labArticles.inline.ts에서 표시 */}
+      <p class="lab-empty" hidden={articles.length > 0}>
+        등록된 게시글이 없습니다.
+      </p>
     </section>
   )
 }
