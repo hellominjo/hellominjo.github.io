@@ -436,6 +436,100 @@ body.lab-drawer-open #quartz-body > .sidebar.left {
   color: var(--lab-text);
 }
 
+/* drawer 검색창 (LabSearchLink): 기존 Quartz 검색 버튼과 같은 모양, Enter 시 /articles?q= 로 이동 */
+.lab-search-link {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  min-width: 0;
+  max-width: 14rem;
+  height: 2rem;
+  margin: 0;
+  border: 1px solid var(--lightgray);
+  border-radius: 4px;
+}
+
+.lab-search-link__icon {
+  flex-shrink: 0;
+  margin: 0 0.5rem;
+  color: var(--darkgray);
+}
+
+.lab-search-link input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0 0.75rem 0 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--lab-text);
+  font: inherit;
+}
+
+.lab-search-link input::placeholder {
+  color: var(--gray);
+}
+
+.lab-search-link:focus-within {
+  border-color: var(--lab-text);
+}
+
+/* /articles 상단 사이트 검색: 필터 탭 줄 우측 (모바일은 필터 아래)
+   .search와 필터가 서로 다른 부모라 .lab-articles를 display: contents로 풀고 grid 배치 */
+body[data-slug="articles"] .center .page-header > .popover-hint {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 24px;
+}
+
+body[data-slug="articles"] .center .page-header .lab-articles {
+  display: contents;
+}
+
+body[data-slug="articles"] .center .page-header > .popover-hint > *,
+body[data-slug="articles"] .center .page-header .lab-articles > * {
+  grid-column: 1 / -1;
+}
+
+/* grid에서는 margin이 겹치지 않으므로 제목 하단 margin 제거 (필터와 간격 유지) */
+body[data-slug="articles"] .center .page-header .lab-section__heading {
+  grid-row: 1;
+  margin-bottom: 0;
+}
+
+body[data-slug="articles"] .center .page-header .lab-article-filters {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+body[data-slug="articles"] .center .page-header > .popover-hint > .search {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  /* 필터 상단 여백(1.5rem) + 버튼(약 35px)과 검색창(32px) 높이 차 보정 */
+  margin-top: calc(1.5rem + 2px);
+  width: 16rem;
+  max-width: none;
+}
+
+@media (max-width: 800px) {
+  body[data-slug="articles"] .center .page-header > .popover-hint {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body[data-slug="articles"] .center .page-header .lab-article-filters {
+    margin-bottom: 1rem;
+  }
+
+  body[data-slug="articles"] .center .page-header > .popover-hint > .search {
+    grid-column: 1;
+    grid-row: 3;
+    width: 100%;
+    margin: 0 0 1.5rem;
+  }
+}
+
 /* Explore Labs (Explorer 아래 외부 링크) */
 .lab-links {
   width: 100%;
@@ -1480,6 +1574,54 @@ body[data-slug="articles"] .lab-section:last-child {
 /* /articles: 헤더 바로 아래에서 시작 */
 body[data-slug="articles"] .lab-articles {
   margin-top: 0;
+}
+
+/* /articles: 제목 아래 글 개수 (Total : N) */
+/* /articles 페이지 번호 (labArticles.inline.ts에서 생성) */
+.lab-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 40px;
+}
+
+.lab-pagination[hidden] {
+  display: none;
+}
+
+.lab-page {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: none;
+  color: var(--lab-muted);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.lab-page:hover:not(:disabled) {
+  color: var(--lab-text);
+  border-color: var(--lab-border);
+}
+
+.lab-page.active {
+  color: var(--lab-bg);
+  background: var(--lab-text);
+}
+
+.lab-page:disabled {
+  color: var(--lab-subtle);
+  opacity: 0.5;
+  cursor: default;
+}
+
+.lab-articles__total {
+  margin: 0 0 16px;
+  color: var(--lab-muted);
+  font-size: 14px;
 }
 
 /* /articles: "ARTICLES / 002" eyebrow 숨김 (홈에서는 표시) */

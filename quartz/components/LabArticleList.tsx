@@ -17,9 +17,14 @@ const categories = [
   { label: "DevOps", tag: "devops" },
 ]
 
+// 글 목록 제외 기준(위치): content 최상위 단독 페이지(About, articles 등) · Archive 폴더
+const isListedArticle = (slug: string) => slug.includes("/") && !slug.startsWith("archive/")
+
 interface Options {
-  // 표시 개수 (미지정 시 전체)
+  // 표시 개수 (미지정 시 전체) — 홈 최신글용, 나머지는 렌더링하지 않음
   limit?: number
+  // 페이지당 개수 — 전체를 렌더링하고 labArticles.inline.ts에서 페이징 (/articles)
+  pageSize?: number
 }
 
 export default ((opts?: Options) => {
@@ -28,8 +33,7 @@ const LabArticleList: QuartzComponent = ({
   fileData,
 }: QuartzComponentProps) => {
   const articles = allFiles
-    .filter((file) => file.slug !== "index")
-    .filter((file) => file.slug !== "articles")
+    .filter((file) => isListedArticle(file.slug ?? ""))
     // 폴더 index.md 제외
     .filter((file) => !file.slug?.endsWith("/index"))
     .filter((file) => file.frontmatter?.title)
@@ -43,7 +47,7 @@ const LabArticleList: QuartzComponent = ({
     .slice(0, opts?.limit)
 
   return (
-    <section class="lab-section lab-articles">
+    <section class="lab-section lab-articles" data-page-size={opts?.pageSize}>
       <p class="lab-hero__eyebrow">ARTICLES / 002</p>
       <h2 class="lab-section__heading">Latest Articles</h2>
 
@@ -58,6 +62,13 @@ const LabArticleList: QuartzComponent = ({
           </button>
         ))}
       </div>
+
+      {/* 전체 목록(/articles)에서만 개수 표시, 필터 시 labArticles.inline.ts에서 숫자 갱신 */}
+      {opts?.pageSize && (
+        <p class="lab-articles__total">
+          Total : <span class="lab-articles__count">{articles.length}</span>
+        </p>
+      )}
 
       <div class="lab-article-list">
         {articles.map((article) => {
@@ -90,6 +101,9 @@ const LabArticleList: QuartzComponent = ({
           )
         })}
       </div>
+
+      {/* 페이지 번호는 labArticles.inline.ts에서 생성 */}
+      {opts?.pageSize && <nav class="lab-pagination" aria-label="Articles pages"></nav>}
 
       {articles.length === 0 && (
         <p class="lab-empty">등록된 게시글이 없습니다.</p>

@@ -107,7 +107,8 @@ async function mouseEnterHandler(
   }
 
   document.body.appendChild(popoverElement)
-  if (activeAnchor !== this) {
+  // 미리보기 로딩 중 페이지가 이동해 링크가 사라졌으면 표시하지 않음 (좌상단에 남는 문제)
+  if (activeAnchor !== this || !this.isConnected) {
     return
   }
 
@@ -119,6 +120,9 @@ function clearActivePopover() {
   const allPopoverElements = document.querySelectorAll(".popover")
   allPopoverElements.forEach((popoverElement) => popoverElement.classList.remove("active-popover"))
 }
+
+// 페이지 이동 시작 시 열린 popover 닫기 (activeAnchor 초기화로 로딩 중인 popover도 표시 안 됨)
+document.addEventListener("prenav", clearActivePopover)
 
 document.addEventListener("nav", () => {
   const links = [...document.querySelectorAll("a.internal")] as HTMLAnchorElement[]

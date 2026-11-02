@@ -6,6 +6,7 @@ import ResearchIndex from "./quartz/components/ResearchIndex"
 import LabArticleList from "./quartz/components/LabArticleList"
 import LabHeader from "./quartz/components/LabHeader"
 import LabLinks from "./quartz/components/LabLinks"
+import LabSearchLink from "./quartz/components/LabSearchLink"
 
 // 홈 / 전체 글 목록(/articles) 페이지 판별
 const isHome = (page: any) => page.fileData.slug === "index"
@@ -88,15 +89,15 @@ export const defaultContentPageLayout: PageLayout = {
         condition: (page) => page.fileData.slug === "index",
     }),  
     Component.ConditionalRender({
-        component: LabArticleList({ limit: 5 }),
+        component: LabArticleList({ limit: 3 }),
         condition: isHome,
     }),
     // 기존 Breadcrumbs, ArticleTitle, ContentMeta, TagList
     Component.ConditionalRender({
       // 상세 페이지에서는 현재 글 제목 제외 (상위 경로만)
       component: Component.Breadcrumbs({ showCurrentPage: false }),
-      // /articles에도 표시 (홈만 제외)
-      condition: (page) => !isHome(page),
+      // 홈 · /articles 제외 (/articles는 제목 옆 검색만)
+      condition: (page) => !isHome(page) && !isArticlesPage(page),
     }),
     Component.ConditionalRender({
       component: Component.ArticleTitle(),
@@ -110,9 +111,14 @@ export const defaultContentPageLayout: PageLayout = {
       component: Component.TagList(),
       condition: isArticle,
     }),
+    // /articles: 상단 사이트 검색 (drawer 검색 시 ?q=로 이동해 자동 실행)
+    Component.ConditionalRender({
+        component: Component.Search(),
+        condition: isArticlesPage,
+    }),
     // /articles: Breadcrumbs 아래에 전체 글 목록
     Component.ConditionalRender({
-        component: LabArticleList(),
+        component: LabArticleList({ pageSize: 5 }),
         condition: isArticlesPage,
     }),
   ],
@@ -123,7 +129,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Flex({
         components: [
         {
-            Component: Component.Search(),
+            Component: LabSearchLink(),
             grow: true,
         },
         { Component: Component.Darkmode() },
@@ -151,7 +157,7 @@ export const defaultListPageLayout: PageLayout = {
     Component.Flex({
       components: [
         {
-          Component: Component.Search(),
+          Component: LabSearchLink(),
           grow: true,
         },
         { Component: Component.Darkmode() },
